@@ -1,8 +1,8 @@
-# antelopy-serializer
+# antelopy
 
 *v0.1.0 - WIP*
 
-A python drop-in ABI cache for Antelope chains with local serialization support. 
+Drop-in Python ABI cache for Antelope chains with local serialization support. 
 
 ## Features
 * Serialization of Antelope built-in types

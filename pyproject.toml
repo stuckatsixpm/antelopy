@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "antelopy"
 version = "0.1.0"
-description = "A python package to handle abi conversions for Antelope chains"
+description = "Python helper for Antelope transaction serialization"
 authors = ["Jake Hattwell <stuck@sixpm.dev>"]
 license = "MIT"
 
