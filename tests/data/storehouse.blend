@@ -1,0 +1,93 @@
+{
+    "authorized_account": "worker.tag",
+    "collection_name": "tag",
+    "ingredients": [
+      [
+        "TEMPLATE_INGREDIENT",
+        {
+          "collection_name": "tag",
+          "template_id": 751805,
+          "amount": 1,
+          "effect": [
+            "TYPED_EFFECT",
+            {
+              "type": 0
+            }
+          ]
+        }
+      ],
+      [
+        "ATTRIBUTE_INGREDIENT",
+        {
+          "collection_name": "tag",
+          "schema_name": "consignment",
+          "display_data":"25x Lumber",
+          "attributes": [
+            {
+              "attribute_name": "amount",
+              "allowed_values": ["25"]
+            },
+            {
+              "attribute_name": "contents",
+              "allowed_values": ["Lumber"]
+            }
+          ],
+          "amount": 1,
+          "effect": [
+            "TYPED_EFFECT",
+            {
+              "type": 0
+            }
+          ]
+        }
+      ],
+      [
+        "ATTRIBUTE_INGREDIENT",
+        {
+          "collection_name": "tag",
+          "schema_name": "consignment",
+          "display_data":"25x Masonry",
+          "attributes": [
+            {
+              "attribute_name": "amount",
+              "allowed_values": ["25"]
+            },
+            {
+              "attribute_name": "contents",
+              "allowed_values": ["Masonry"]
+            }
+          ],
+          "amount": 1,
+          "effect": [
+            "TYPED_EFFECT",
+            {
+              "type": 0
+            }
+          ]
+        }
+      ]
+    ],
+    "rolls": [
+      {
+        "outcomes": [
+          {
+            "odds": 1,
+            "results": [
+              [
+                "ON_DEMAND_NFT_RESULT_WITH_ATTRIBUTES",
+                { "template_id": 751828, "mutable_data": [] }
+              ]
+            ]
+          }
+        ],
+        "total_odds": 1
+      }
+    ],
+    "upgrade_specs":[],
+    "start_time": 1696680000,
+    "end_time": 0,
+    "max_uses": 0,
+    "display_data": "{}",
+    "security_id": "0"
+  }
+  

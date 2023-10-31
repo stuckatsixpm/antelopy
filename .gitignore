@@ -1,0 +1,10 @@
+# Poetry
+poetry.lock
+
+# Python
+*.py[cod]
+
+# Dev
+dev
+.vscode
+

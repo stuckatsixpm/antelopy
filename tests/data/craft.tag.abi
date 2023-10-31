@@ -1,0 +1,1296 @@
+{
+  "version": "eosio::abi/1.2",
+  "types": [
+    {
+      "new_type_name": "ATOMIC_ATTRIBUTE",
+      "type": "variant_int8_int16_int32_int64_uint8_uint16_uint32_uint64_float32_float64_string_INT8_VEC_INT16_VEC_INT32_VEC_INT64_VEC_UINT8_VEC_UINT16_VEC_UINT32_VEC_UINT64_VEC_FLOAT_VEC_DOUBLE_VEC_STRING_VEC"
+    },
+    {
+      "new_type_name": "ATOMIC_ATTRIBUTE_VALUES",
+      "type": "variant_INT8_VALS_INT16_VALS_INT32_VALS_INT64_VALS_UINT8_VALS_UINT16_VALS_UINT32_VALS_UINT64_VALS_FLOAT_VALS_DOUBLE_VALS_STRING_VALS"
+    },
+    {
+      "new_type_name": "ATTRIBUTE_MAP",
+      "type": "pair_string_ATOMIC_ATTRIBUTE[]"
+    },
+    {
+      "new_type_name": "CLAIM",
+      "type": "variant_ON_DEMAND_NFT_CLAIM_EMPTY_CLAIM_UPGRADE_CLAIM"
+    },
+    {
+      "new_type_name": "DOUBLE_VALS",
+      "type": "float64[]"
+    },
+    {
+      "new_type_name": "DOUBLE_VEC",
+      "type": "float64[]"
+    },
+    {
+      "new_type_name": "EFFECT",
+      "type": "variant_TYPED_EFFECT"
+    },
+    {
+      "new_type_name": "FLOAT_VALS",
+      "type": "float32[]"
+    },
+    {
+      "new_type_name": "FLOAT_VEC",
+      "type": "float32[]"
+    },
+    {
+      "new_type_name": "IMMEDIATE_VALUE",
+      "type": "variant_string_uint64"
+    },
+    {
+      "new_type_name": "INGREDIENT",
+      "type": "variant_TEMPLATE_INGREDIENT_ATTRIBUTE_INGREDIENT_SCHEMA_INGREDIENT_TYPED_ATTRIBUTE_INGREDIENT"
+    },
+    {
+      "new_type_name": "INT16_VALS",
+      "type": "int16[]"
+    },
+    {
+      "new_type_name": "INT16_VEC",
+      "type": "int16[]"
+    },
+    {
+      "new_type_name": "INT32_VALS",
+      "type": "int32[]"
+    },
+    {
+      "new_type_name": "INT32_VEC",
+      "type": "int32[]"
+    },
+    {
+      "new_type_name": "INT64_VALS",
+      "type": "int64[]"
+    },
+    {
+      "new_type_name": "INT64_VEC",
+      "type": "int64[]"
+    },
+    {
+      "new_type_name": "INT8_VALS",
+      "type": "bytes"
+    },
+    {
+      "new_type_name": "INT8_VEC",
+      "type": "bytes"
+    },
+    {
+      "new_type_name": "RESULT",
+      "type": "variant_ON_DEMAND_NFT_RESULT_WITH_ATTRIBUTES"
+    },
+    {
+      "new_type_name": "RESULT_VALUE",
+      "type": "variant_VALUE_ROLL_RESULT_IMMEDIATE_VALUE"
+    },
+    {
+      "new_type_name": "SECURITY_CHECK",
+      "type": "variant_WHITELIST_CHECK_OWNERSHIP_CHECK"
+    },
+    {
+      "new_type_name": "STRING_VALS",
+      "type": "string[]"
+    },
+    {
+      "new_type_name": "STRING_VEC",
+      "type": "string[]"
+    },
+    {
+      "new_type_name": "UINT16_VALS",
+      "type": "uint16[]"
+    },
+    {
+      "new_type_name": "UINT16_VEC",
+      "type": "uint16[]"
+    },
+    {
+      "new_type_name": "UINT32_VALS",
+      "type": "uint32[]"
+    },
+    {
+      "new_type_name": "UINT32_VEC",
+      "type": "uint32[]"
+    },
+    {
+      "new_type_name": "UINT64_VALS",
+      "type": "uint64[]"
+    },
+    {
+      "new_type_name": "UINT64_VEC",
+      "type": "uint64[]"
+    },
+    {
+      "new_type_name": "UINT8_VALS",
+      "type": "bytes"
+    },
+    {
+      "new_type_name": "UINT8_VEC",
+      "type": "bytes"
+    },
+    {
+      "new_type_name": "UPGRADE_REQUIREMENT",
+      "type": "variant_TEMPLATE_REQUIREMENT_TYPED_ATTRIBUTE_REQUIREMENT"
+    }
+  ],
+  "structs": [
+    {
+      "name": "ATTRIBUTE_DEFINITION",
+      "base": "",
+      "fields": [
+        {
+          "name": "attribute_name",
+          "type": "string"
+        },
+        {
+          "name": "allowed_values",
+          "type": "string[]"
+        }
+      ]
+    },
+    {
+      "name": "ATTRIBUTE_INGREDIENT",
+      "base": "",
+      "fields": [
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "schema_name",
+          "type": "name"
+        },
+        {
+          "name": "display_data",
+          "type": "string"
+        },
+        {
+          "name": "attributes",
+          "type": "ATTRIBUTE_DEFINITION[]"
+        },
+        {
+          "name": "amount",
+          "type": "uint32"
+        },
+        {
+          "name": "effect",
+          "type": "EFFECT"
+        }
+      ]
+    },
+    {
+      "name": "CLAIMABLE",
+      "base": "",
+      "fields": [
+        {
+          "name": "claim",
+          "type": "CLAIM"
+        },
+        {
+          "name": "is_claimed",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "EMPTY_CLAIM",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "ON_DEMAND_NFT_CLAIM",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "int32"
+        },
+        {
+          "name": "mutable_data",
+          "type": "ATTRIBUTE_MAP"
+        }
+      ]
+    },
+    {
+      "name": "ON_DEMAND_NFT_RESULT_WITH_ATTRIBUTES",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "int32"
+        },
+        {
+          "name": "mutable_data",
+          "type": "ATTRIBUTE_MAP"
+        }
+      ]
+    },
+    {
+      "name": "OUTCOME",
+      "base": "",
+      "fields": [
+        {
+          "name": "odds",
+          "type": "uint32"
+        },
+        {
+          "name": "results",
+          "type": "RESULT[]"
+        }
+      ]
+    },
+    {
+      "name": "OWNERSHIP_CHECK",
+      "base": "",
+      "fields": [
+        {
+          "name": "account_name",
+          "type": "name"
+        },
+        {
+          "name": "asset_ids",
+          "type": "uint64[]"
+        }
+      ]
+    },
+    {
+      "name": "ROLL",
+      "base": "",
+      "fields": [
+        {
+          "name": "outcomes",
+          "type": "OUTCOME[]"
+        },
+        {
+          "name": "total_odds",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "SCHEMA_INGREDIENT",
+      "base": "",
+      "fields": [
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "schema_name",
+          "type": "name"
+        },
+        {
+          "name": "display_data",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "uint32"
+        },
+        {
+          "name": "effect",
+          "type": "EFFECT"
+        }
+      ]
+    },
+    {
+      "name": "TEMPLATE_INGREDIENT",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "uint32"
+        },
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "amount",
+          "type": "uint32"
+        },
+        {
+          "name": "effect",
+          "type": "EFFECT"
+        }
+      ]
+    },
+    {
+      "name": "TEMPLATE_REQUIREMENT",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "TYPED_ATTRIBUTE_DEFINITION",
+      "base": "",
+      "fields": [
+        {
+          "name": "attribute_name",
+          "type": "string"
+        },
+        {
+          "name": "attribute_type",
+          "type": "string"
+        },
+        {
+          "name": "allowed_values",
+          "type": "ATOMIC_ATTRIBUTE_VALUES"
+        }
+      ]
+    },
+    {
+      "name": "TYPED_ATTRIBUTE_INGREDIENT",
+      "base": "",
+      "fields": [
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "schema_name",
+          "type": "name"
+        },
+        {
+          "name": "display_data",
+          "type": "string"
+        },
+        {
+          "name": "attributes",
+          "type": "TYPED_ATTRIBUTE_DEFINITION[]"
+        },
+        {
+          "name": "amount",
+          "type": "uint32"
+        },
+        {
+          "name": "effect",
+          "type": "EFFECT"
+        }
+      ]
+    },
+    {
+      "name": "TYPED_ATTRIBUTE_REQUIREMENT",
+      "base": "",
+      "fields": [
+        {
+          "name": "typed_attribute_definition",
+          "type": "TYPED_ATTRIBUTE_DEFINITION"
+        }
+      ]
+    },
+    {
+      "name": "TYPED_EFFECT",
+      "base": "",
+      "fields": [
+        {
+          "name": "type",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "UPGRADE_CLAIM",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_id",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "UPGRADE_OPERATOR",
+      "base": "",
+      "fields": [
+        {
+          "name": "type",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "UPGRADE_RESULT",
+      "base": "",
+      "fields": [
+        {
+          "name": "attribute_name",
+          "type": "string"
+        },
+        {
+          "name": "attribute_type",
+          "type": "string"
+        },
+        {
+          "name": "op",
+          "type": "UPGRADE_OPERATOR"
+        },
+        {
+          "name": "value",
+          "type": "RESULT_VALUE"
+        }
+      ]
+    },
+    {
+      "name": "UPGRADE_SPEC",
+      "base": "",
+      "fields": [
+        {
+          "name": "schema_name",
+          "type": "name"
+        },
+        {
+          "name": "upgrade_requirements",
+          "type": "UPGRADE_REQUIREMENT[]"
+        },
+        {
+          "name": "upgrade_results",
+          "type": "UPGRADE_RESULT[]"
+        },
+        {
+          "name": "display_data",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "VALUE_OUTCOME",
+      "base": "",
+      "fields": [
+        {
+          "name": "result",
+          "type": "IMMEDIATE_VALUE"
+        },
+        {
+          "name": "odds",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "VALUE_ROLL_RESULT",
+      "base": "",
+      "fields": [
+        {
+          "name": "valueroll_id",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "WHITELIST_CHECK",
+      "base": "",
+      "fields": [
+        {
+          "name": "account_name",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "addallowcol",
+      "base": "",
+      "fields": [
+        {
+          "name": "collection_name",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "allowcol_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "collection_name",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "announcedepo",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "count",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "blend_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "start_time",
+          "type": "uint32"
+        },
+        {
+          "name": "end_time",
+          "type": "uint32"
+        },
+        {
+          "name": "ingredients",
+          "type": "INGREDIENT[]"
+        },
+        {
+          "name": "rolls",
+          "type": "ROLL[]"
+        },
+        {
+          "name": "max",
+          "type": "uint32"
+        },
+        {
+          "name": "use_count",
+          "type": "uint32"
+        },
+        {
+          "name": "display_data",
+          "type": "string"
+        },
+        {
+          "name": "security_id",
+          "type": "uint64$"
+        },
+        {
+          "name": "upgrade_specs",
+          "type": "UPGRADE_SPEC[]$"
+        }
+      ]
+    },
+    {
+      "name": "claim",
+      "base": "",
+      "fields": [
+        {
+          "name": "claim_id",
+          "type": "uint64"
+        },
+        {
+          "name": "claim_indexes",
+          "type": "uint32[]"
+        }
+      ]
+    },
+    {
+      "name": "claim_assets_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "claim_id",
+          "type": "uint64"
+        },
+        {
+          "name": "recipient",
+          "type": "name"
+        },
+        {
+          "name": "recipe_id",
+          "type": "uint64"
+        },
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "claims",
+          "type": "CLAIMABLE[]"
+        }
+      ]
+    },
+    {
+      "name": "counters_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "counter_name",
+          "type": "name"
+        },
+        {
+          "name": "counter_value",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "createblend",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "ingredients",
+          "type": "INGREDIENT[]"
+        },
+        {
+          "name": "upgrade_specs",
+          "type": "UPGRADE_SPEC[]"
+        },
+        {
+          "name": "rolls",
+          "type": "ROLL[]"
+        },
+        {
+          "name": "start_time",
+          "type": "uint32"
+        },
+        {
+          "name": "end_time",
+          "type": "uint32"
+        },
+        {
+          "name": "max_uses",
+          "type": "uint32"
+        },
+        {
+          "name": "display_data",
+          "type": "string"
+        },
+        {
+          "name": "security_id",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "delblend",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "fuse",
+      "base": "",
+      "fields": [
+        {
+          "name": "claimer",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "transferred_assets",
+          "type": "uint64[]"
+        },
+        {
+          "name": "security_check",
+          "type": "SECURITY_CHECK"
+        }
+      ]
+    },
+    {
+      "name": "inventory_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "assets",
+          "type": "uint64[]"
+        }
+      ]
+    },
+    {
+      "name": "lognewblend",
+      "base": "",
+      "fields": [
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "max_uses",
+          "type": "uint32"
+        },
+        {
+          "name": "ingredients",
+          "type": "INGREDIENT[]"
+        },
+        {
+          "name": "rolls",
+          "type": "ROLL[]"
+        },
+        {
+          "name": "start_time",
+          "type": "uint32"
+        },
+        {
+          "name": "end_time",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "nosecfuse",
+      "base": "",
+      "fields": [
+        {
+          "name": "claimer",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "transferred_assets",
+          "type": "uint64[]"
+        }
+      ]
+    },
+    {
+      "name": "orngjobs_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "claim_id",
+          "type": "uint64"
+        },
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "recipe_id",
+          "type": "uint64"
+        },
+        {
+          "name": "recipient",
+          "type": "name"
+        },
+        {
+          "name": "assets_to_upgrade",
+          "type": "uint64[]$"
+        }
+      ]
+    },
+    {
+      "name": "pair_string_ATOMIC_ATTRIBUTE",
+      "base": "",
+      "fields": [
+        {
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "type": "ATOMIC_ATTRIBUTE"
+        }
+      ]
+    },
+    {
+      "name": "receiverand",
+      "base": "",
+      "fields": [
+        {
+          "name": "assoc_id",
+          "type": "uint64"
+        },
+        {
+          "name": "random_value",
+          "type": "checksum256"
+        }
+      ]
+    },
+    {
+      "name": "retryrand",
+      "base": "",
+      "fields": [
+        {
+          "name": "claim_id",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "rmallowcol",
+      "base": "",
+      "fields": [
+        {
+          "name": "collection_name",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "setblenddata",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "display_data",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "setblendmax",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "new_max_uses",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "setblendroll",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "rolls",
+          "type": "ROLL[]"
+        }
+      ]
+    },
+    {
+      "name": "setblendsec",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "security_id",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "setblendtime",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "start_time",
+          "type": "uint32"
+        },
+        {
+          "name": "end_time",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "upgnosec",
+      "base": "",
+      "fields": [
+        {
+          "name": "claimer",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "ingredients",
+          "type": "uint64[]"
+        },
+        {
+          "name": "assets_to_upgrade",
+          "type": "uint64[]"
+        }
+      ]
+    },
+    {
+      "name": "upgrade",
+      "base": "",
+      "fields": [
+        {
+          "name": "claimer",
+          "type": "name"
+        },
+        {
+          "name": "blend_id",
+          "type": "uint64"
+        },
+        {
+          "name": "ingredients",
+          "type": "uint64[]"
+        },
+        {
+          "name": "assets_to_upgrade",
+          "type": "uint64[]"
+        },
+        {
+          "name": "security_check",
+          "type": "SECURITY_CHECK$"
+        }
+      ]
+    },
+    {
+      "name": "upsertvalrl",
+      "base": "",
+      "fields": [
+        {
+          "name": "authorized_account",
+          "type": "name"
+        },
+        {
+          "name": "collection_name",
+          "type": "name"
+        },
+        {
+          "name": "valueroll_id",
+          "type": "name"
+        },
+        {
+          "name": "value_outcomes",
+          "type": "VALUE_OUTCOME[]"
+        },
+        {
+          "name": "total_odds",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "valueroll_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "name"
+        },
+        {
+          "name": "value_outcomes",
+          "type": "VALUE_OUTCOME[]"
+        },
+        {
+          "name": "total_odds",
+          "type": "uint32"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "addallowcol",
+      "type": "addallowcol",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "announcedepo",
+      "type": "announcedepo",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "claim",
+      "type": "claim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "createblend",
+      "type": "createblend",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "delblend",
+      "type": "delblend",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "fuse",
+      "type": "fuse",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "lognewblend",
+      "type": "lognewblend",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "nosecfuse",
+      "type": "nosecfuse",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "receiverand",
+      "type": "receiverand",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "retryrand",
+      "type": "retryrand",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmallowcol",
+      "type": "rmallowcol",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setblenddata",
+      "type": "setblenddata",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setblendmax",
+      "type": "setblendmax",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setblendroll",
+      "type": "setblendroll",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setblendsec",
+      "type": "setblendsec",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setblendtime",
+      "type": "setblendtime",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "upgnosec",
+      "type": "upgnosec",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "upgrade",
+      "type": "upgrade",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "upsertvalrl",
+      "type": "upsertvalrl",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [
+    {
+      "name": "allowcols",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "allowcol_s"
+    },
+    {
+      "name": "blends",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "blend_s"
+    },
+    {
+      "name": "claimassets",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "claim_assets_s"
+    },
+    {
+      "name": "counters",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "counters_s"
+    },
+    {
+      "name": "inventory",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "inventory_s"
+    },
+    {
+      "name": "orngjobs",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "orngjobs_s"
+    },
+    {
+      "name": "valuerolls",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "valueroll_s"
+    }
+  ],
+  "ricardian_clauses": [],
+  "error_messages": [],
+  "abi_extensions": [],
+  "variants": [
+    {
+      "name": "variant_INT8_VALS_INT16_VALS_INT32_VALS_INT64_VALS_UINT8_VALS_UINT16_VALS_UINT32_VALS_UINT64_VALS_FLOAT_VALS_DOUBLE_VALS_STRING_VALS",
+      "types": [
+        "INT8_VALS",
+        "INT16_VALS",
+        "INT32_VALS",
+        "INT64_VALS",
+        "UINT8_VALS",
+        "UINT16_VALS",
+        "UINT32_VALS",
+        "UINT64_VALS",
+        "FLOAT_VALS",
+        "DOUBLE_VALS",
+        "STRING_VALS"
+      ]
+    },
+    {
+      "name": "variant_ON_DEMAND_NFT_CLAIM_EMPTY_CLAIM_UPGRADE_CLAIM",
+      "types": [
+        "ON_DEMAND_NFT_CLAIM",
+        "EMPTY_CLAIM",
+        "UPGRADE_CLAIM"
+      ]
+    },
+    {
+      "name": "variant_ON_DEMAND_NFT_RESULT_WITH_ATTRIBUTES",
+      "types": [
+        "ON_DEMAND_NFT_RESULT_WITH_ATTRIBUTES"
+      ]
+    },
+    {
+      "name": "variant_TEMPLATE_INGREDIENT_ATTRIBUTE_INGREDIENT_SCHEMA_INGREDIENT_TYPED_ATTRIBUTE_INGREDIENT",
+      "types": [
+        "TEMPLATE_INGREDIENT",
+        "ATTRIBUTE_INGREDIENT",
+        "SCHEMA_INGREDIENT",
+        "TYPED_ATTRIBUTE_INGREDIENT"
+      ]
+    },
+    {
+      "name": "variant_TEMPLATE_REQUIREMENT_TYPED_ATTRIBUTE_REQUIREMENT",
+      "types": [
+        "TEMPLATE_REQUIREMENT",
+        "TYPED_ATTRIBUTE_REQUIREMENT"
+      ]
+    },
+    {
+      "name": "variant_TYPED_EFFECT",
+      "types": [
+        "TYPED_EFFECT"
+      ]
+    },
+    {
+      "name": "variant_VALUE_ROLL_RESULT_IMMEDIATE_VALUE",
+      "types": [
+        "VALUE_ROLL_RESULT",
+        "IMMEDIATE_VALUE"
+      ]
+    },
+    {
+      "name": "variant_WHITELIST_CHECK_OWNERSHIP_CHECK",
+      "types": [
+        "WHITELIST_CHECK",
+        "OWNERSHIP_CHECK"
+      ]
+    },
+    {
+      "name": "variant_int8_int16_int32_int64_uint8_uint16_uint32_uint64_float32_float64_string_INT8_VEC_INT16_VEC_INT32_VEC_INT64_VEC_UINT8_VEC_UINT16_VEC_UINT32_VEC_UINT64_VEC_FLOAT_VEC_DOUBLE_VEC_STRING_VEC",
+      "types": [
+        "int8",
+        "int16",
+        "int32",
+        "int64",
+        "uint8",
+        "uint16",
+        "uint32",
+        "uint64",
+        "float32",
+        "float64",
+        "string",
+        "INT8_VEC",
+        "INT16_VEC",
+        "INT32_VEC",
+        "INT64_VEC",
+        "UINT8_VEC",
+        "UINT16_VEC",
+        "UINT32_VEC",
+        "UINT64_VEC",
+        "FLOAT_VEC",
+        "DOUBLE_VEC",
+        "STRING_VEC"
+      ]
+    },
+    {
+      "name": "variant_string_uint64",
+      "types": [
+        "string",
+        "uint64"
+      ]
+    }
+  ],
+  "action_results": []
+}

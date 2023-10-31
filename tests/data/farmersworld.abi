@@ -1,0 +1,2557 @@
+{
+  "version": "eosio::abi/1.2",
+  "types": [
+    {
+      "new_type_name": "asset_id_type",
+      "type": "uint64"
+    },
+    {
+      "new_type_name": "durability_type",
+      "type": "uint16"
+    },
+    {
+      "new_type_name": "energy_type",
+      "type": "uint16"
+    },
+    {
+      "new_type_name": "rate_type",
+      "type": "uint8"
+    },
+    {
+      "new_type_name": "resource_type",
+      "type": "uint32"
+    },
+    {
+      "new_type_name": "template_id_type",
+      "type": "uint32"
+    }
+  ],
+  "structs": [
+    {
+      "name": "account2fa_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "pubkey",
+          "type": "public_key"
+        },
+        {
+          "name": "features",
+          "type": "uint64"
+        },
+        {
+          "name": "unlock_duration",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "accounts_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "energy",
+          "type": "energy_type"
+        },
+        {
+          "name": "max_energy",
+          "type": "energy_type"
+        },
+        {
+          "name": "last_mine_tx",
+          "type": "checksum256"
+        },
+        {
+          "name": "balances",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "addblistacc",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "addsupport",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "role",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "animals_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "building_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "times_claimed",
+          "type": "uint8"
+        },
+        {
+          "name": "last_claimed",
+          "type": "uint64"
+        },
+        {
+          "name": "day_claims_at",
+          "type": "uint64[]"
+        },
+        {
+          "name": "next_availability",
+          "type": "uint64"
+        },
+        {
+          "name": "gender",
+          "type": "uint8"
+        },
+        {
+          "name": "partner_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "anmclaim",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "animal_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "anmconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "daily_claim_limit",
+          "type": "uint8"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        },
+        {
+          "name": "consumed_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "consumed_quantity",
+          "type": "uint8"
+        },
+        {
+          "name": "evolved_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "reward_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "required_building",
+          "type": "template_id_type"
+        },
+        {
+          "name": "breeding_partner",
+          "type": "template_id_type"
+        },
+        {
+          "name": "gender",
+          "type": "int8"
+        }
+      ]
+    },
+    {
+      "name": "blacklist_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "bldclaim",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "bldconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        },
+        {
+          "name": "craft_cost",
+          "type": "asset[]"
+        },
+        {
+          "name": "num_slots",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "brdstart",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "bearer_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "partner_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "breedconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "consumed_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "consumed_quantity",
+          "type": "uint8"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "daily_claim_limit",
+          "type": "uint8"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "partner_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "required_building",
+          "type": "template_id_type"
+        },
+        {
+          "name": "reward_card",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "breedings_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "bearer_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "partner_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "building_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "times_claimed",
+          "type": "uint8"
+        },
+        {
+          "name": "last_claimed",
+          "type": "uint64"
+        },
+        {
+          "name": "day_claims_at",
+          "type": "uint64[]"
+        },
+        {
+          "name": "next_availability",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "buildings_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "is_ready",
+          "type": "bool"
+        },
+        {
+          "name": "times_claimed",
+          "type": "uint8"
+        },
+        {
+          "name": "next_availability",
+          "type": "uint64"
+        },
+        {
+          "name": "slots_used",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "cancelrm2fa",
+      "base": "",
+      "fields": [
+        {
+          "name": "user",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "claim",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "claimasset",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "claimrm2fa",
+      "base": "",
+      "fields": [
+        {
+          "name": "user",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "clear2fa",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "coinstake_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "user",
+          "type": "name"
+        },
+        {
+          "name": "amount",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "config_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "init_energy",
+          "type": "energy_type"
+        },
+        {
+          "name": "init_max_energy",
+          "type": "energy_type"
+        },
+        {
+          "name": "reward_noise_min",
+          "type": "int32"
+        },
+        {
+          "name": "reward_noise_max",
+          "type": "int32"
+        },
+        {
+          "name": "min_fee",
+          "type": "uint8"
+        },
+        {
+          "name": "max_fee",
+          "type": "uint8"
+        },
+        {
+          "name": "last_fee_updated",
+          "type": "uint64"
+        },
+        {
+          "name": "fee",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "cropclaim",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "crop_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "cropconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        },
+        {
+          "name": "reward_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "required_building",
+          "type": "template_id_type"
+        },
+        {
+          "name": "miss_claim_limit",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "crops_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "building_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "times_claimed",
+          "type": "uint8"
+        },
+        {
+          "name": "last_claimed",
+          "type": "uint64"
+        },
+        {
+          "name": "next_availability",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "fcoinscan_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "last_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "batch_size",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "itemconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "schema_name",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "can_burn",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "logbonus",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_owner",
+          "type": "name"
+        },
+        {
+          "name": "bonus_rewards",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "logburnrs",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "rewards",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "logclaim",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "rewards",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "logclaimrs",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "animal_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "reward_type",
+          "type": "string"
+        },
+        {
+          "name": "reward_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "quantity",
+          "type": "int16"
+        }
+      ]
+    },
+    {
+      "name": "logmbsclaim",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_owner",
+          "type": "name"
+        },
+        {
+          "name": "amounts",
+          "type": "uint16[]"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        }
+      ]
+    },
+    {
+      "name": "logopenpack",
+      "base": "",
+      "fields": [
+        {
+          "name": "points",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "mbs_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "next_availability",
+          "type": "uint64"
+        },
+        {
+          "name": "unstaking_time",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "mbsclaim",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "mbsconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "uint32"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "badge_img",
+          "type": "string"
+        },
+        {
+          "name": "saved_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "additional_slots",
+          "type": "uint8"
+        },
+        {
+          "name": "additional_energy",
+          "type": "uint16"
+        },
+        {
+          "name": "rewards_rate",
+          "type": "uint8"
+        },
+        {
+          "name": "lucky",
+          "type": "uint8"
+        },
+        {
+          "name": "golds_mint",
+          "type": "asset"
+        },
+        {
+          "name": "coins_mint",
+          "type": "uint16"
+        },
+        {
+          "name": "unstaking_time",
+          "type": "uint64"
+        },
+        {
+          "name": "charged_time",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "mbscraft_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint32"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "saved_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "additional_slots",
+          "type": "uint8"
+        },
+        {
+          "name": "additional_energy",
+          "type": "uint16"
+        },
+        {
+          "name": "rewards_rate",
+          "type": "uint8"
+        },
+        {
+          "name": "lucky",
+          "type": "uint8"
+        },
+        {
+          "name": "golds_mint",
+          "type": "asset"
+        },
+        {
+          "name": "coins_mint",
+          "type": "uint16"
+        },
+        {
+          "name": "unstaking_time",
+          "type": "uint64"
+        },
+        {
+          "name": "charged_time",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "mbsunstake",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "migrate",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "migrate2",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "mintasset",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "memo",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "mintbld",
+      "base": "",
+      "fields": [
+        {
+          "name": "new_owner",
+          "type": "name"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "mintmbs",
+      "base": "",
+      "fields": [
+        {
+          "name": "user",
+          "type": "name"
+        },
+        {
+          "name": "mname",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "mktbuy",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "quantity",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "mktconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "schema_name",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "cost",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "newuser",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "referral_partner",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "noop",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "oracles_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "role",
+          "type": "uint64"
+        },
+        {
+          "name": "pubkey",
+          "type": "public_key"
+        }
+      ]
+    },
+    {
+      "name": "packs_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "gold_reward",
+          "type": "resource_type"
+        },
+        {
+          "name": "food_reward",
+          "type": "resource_type"
+        },
+        {
+          "name": "wood_reward",
+          "type": "resource_type"
+        },
+        {
+          "name": "gold_rate",
+          "type": "rate_type"
+        },
+        {
+          "name": "wood_rate",
+          "type": "rate_type"
+        },
+        {
+          "name": "food_rate",
+          "type": "rate_type"
+        },
+        {
+          "name": "template_ids",
+          "type": "template_id_type[]"
+        },
+        {
+          "name": "rate_list",
+          "type": "rate_type[]"
+        },
+        {
+          "name": "quantity",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "partners_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "tier",
+          "type": "uint8"
+        },
+        {
+          "name": "is_active",
+          "type": "bool"
+        },
+        {
+          "name": "totals",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "rands_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint8"
+        },
+        {
+          "name": "counter",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "recover",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "energy_recovered",
+          "type": "energy_type"
+        }
+      ]
+    },
+    {
+      "name": "referrals_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "partner",
+          "type": "name"
+        },
+        {
+          "name": "totals",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "repair",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "rm2fareqs_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "support",
+          "type": "name"
+        },
+        {
+          "name": "user",
+          "type": "name"
+        },
+        {
+          "name": "unlock_at",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "rmacc2fa",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "rmanmconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "rmbldconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "rmblistacc",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "rmbreedconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "rmcropconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "rmfcoinscan",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "rmitemconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "rmmktconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "rmsupport",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "rmtktconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "runcleanup",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "sendcoin",
+      "base": "",
+      "fields": [
+        {
+          "name": "from",
+          "type": "name"
+        },
+        {
+          "name": "to",
+          "type": "name"
+        },
+        {
+          "name": "amount",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "name": "setacc2fa",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "pubkey",
+          "type": "public_key"
+        },
+        {
+          "name": "unlock_duration",
+          "type": "uint64"
+        },
+        {
+          "name": "features",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "setanmconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "daily_claim_limit",
+          "type": "uint8"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        },
+        {
+          "name": "consumed_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "consumed_quantity",
+          "type": "uint8"
+        },
+        {
+          "name": "evolved_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "reward_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "required_building",
+          "type": "template_id_type"
+        },
+        {
+          "name": "breeding_partner",
+          "type": "template_id_type"
+        },
+        {
+          "name": "gender",
+          "type": "int8"
+        }
+      ]
+    },
+    {
+      "name": "setbldconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        },
+        {
+          "name": "craft_cost",
+          "type": "asset[]"
+        },
+        {
+          "name": "num_slots",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "setbreedconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "consumed_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "consumed_quantity",
+          "type": "uint8"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "daily_claim_limit",
+          "type": "uint8"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "partner_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "required_building",
+          "type": "template_id_type"
+        },
+        {
+          "name": "reward_card",
+          "type": "template_id_type"
+        }
+      ]
+    },
+    {
+      "name": "setcropconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "charge_time",
+          "type": "uint64"
+        },
+        {
+          "name": "required_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        },
+        {
+          "name": "reward_card",
+          "type": "template_id_type"
+        },
+        {
+          "name": "required_building",
+          "type": "template_id_type"
+        },
+        {
+          "name": "miss_claim_limit",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "setfcoinscan",
+      "base": "",
+      "fields": [
+        {
+          "name": "last_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "batch_size",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "name": "setitemconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "schema_name",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "can_burn",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "setmbscraft",
+      "base": "",
+      "fields": [
+        {
+          "name": "id",
+          "type": "uint32"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "saved_claims",
+          "type": "uint8"
+        },
+        {
+          "name": "additional_slots",
+          "type": "uint8"
+        },
+        {
+          "name": "additional_energy",
+          "type": "uint16"
+        },
+        {
+          "name": "rewards_rate",
+          "type": "uint8"
+        },
+        {
+          "name": "unstaking_time",
+          "type": "uint64"
+        },
+        {
+          "name": "charged_time",
+          "type": "uint64"
+        },
+        {
+          "name": "lucky",
+          "type": "uint8"
+        },
+        {
+          "name": "golds_mint",
+          "type": "asset"
+        },
+        {
+          "name": "coins_mint",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "name": "setmktconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "schema_name",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "cost",
+          "type": "asset[]"
+        }
+      ]
+    },
+    {
+      "name": "setpartner",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "is_active",
+          "type": "bool"
+        },
+        {
+          "name": "tier",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "settktconf",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "type",
+          "type": "uint16"
+        },
+        {
+          "name": "percentage",
+          "type": "int16"
+        }
+      ]
+    },
+    {
+      "name": "supports_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "role",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "suprm2fa",
+      "base": "",
+      "fields": [
+        {
+          "name": "support",
+          "type": "name"
+        },
+        {
+          "name": "user",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "supsetfcscan",
+      "base": "",
+      "fields": [
+        {
+          "name": "support",
+          "type": "name"
+        },
+        {
+          "name": "batch_size",
+          "type": "uint16"
+        }
+      ]
+    },
+    {
+      "name": "tassets_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "asset_owner",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "ticketconf_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "type",
+          "type": "uint16"
+        },
+        {
+          "name": "percentage",
+          "type": "int16"
+        }
+      ]
+    },
+    {
+      "name": "time2fa_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "last_timestamp",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "toolconfigs_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "template_name",
+          "type": "string"
+        },
+        {
+          "name": "img",
+          "type": "string"
+        },
+        {
+          "name": "schema_name",
+          "type": "name"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "rarity",
+          "type": "string"
+        },
+        {
+          "name": "level",
+          "type": "uint8"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "energy_consumed",
+          "type": "energy_type"
+        },
+        {
+          "name": "durability_consumed",
+          "type": "durability_type"
+        },
+        {
+          "name": "mints",
+          "type": "asset[]"
+        },
+        {
+          "name": "rewards",
+          "type": "asset[]"
+        },
+        {
+          "name": "charged_time",
+          "type": "uint32"
+        }
+      ]
+    },
+    {
+      "name": "tools_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        },
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "name": "template_id",
+          "type": "template_id_type"
+        },
+        {
+          "name": "durability",
+          "type": "durability_type"
+        },
+        {
+          "name": "current_durability",
+          "type": "durability_type"
+        },
+        {
+          "name": "next_availability",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "u_table",
+      "base": "",
+      "fields": [
+        {
+          "name": "acc",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "unbreed",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "bearer_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "unstake",
+      "base": "",
+      "fields": [
+        {
+          "name": "asset_owner",
+          "type": "name"
+        },
+        {
+          "name": "asset_id",
+          "type": "asset_id_type"
+        }
+      ]
+    },
+    {
+      "name": "verify2fa",
+      "base": "",
+      "fields": [
+        {
+          "name": "account",
+          "type": "name"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint64"
+        },
+        {
+          "name": "sig",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "withdraw",
+      "base": "",
+      "fields": [
+        {
+          "name": "owner",
+          "type": "name"
+        },
+        {
+          "name": "quantities",
+          "type": "asset[]"
+        },
+        {
+          "name": "fee",
+          "type": "uint8"
+        }
+      ]
+    },
+    {
+      "name": "withdrawcoin",
+      "base": "",
+      "fields": [
+        {
+          "name": "new_owner",
+          "type": "name"
+        },
+        {
+          "name": "amount",
+          "type": "uint16"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "addblistacc",
+      "type": "addblistacc",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "addsupport",
+      "type": "addsupport",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "anmclaim",
+      "type": "anmclaim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "bldclaim",
+      "type": "bldclaim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "brdstart",
+      "type": "brdstart",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "cancelrm2fa",
+      "type": "cancelrm2fa",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "claim",
+      "type": "claim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "claimasset",
+      "type": "claimasset",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "claimrm2fa",
+      "type": "claimrm2fa",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "clear2fa",
+      "type": "clear2fa",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "cropclaim",
+      "type": "cropclaim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "init",
+      "type": "init",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "logbonus",
+      "type": "logbonus",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "logburnrs",
+      "type": "logburnrs",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "logclaim",
+      "type": "logclaim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "logclaimrs",
+      "type": "logclaimrs",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "logmbsclaim",
+      "type": "logmbsclaim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "logopenpack",
+      "type": "logopenpack",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "mbsclaim",
+      "type": "mbsclaim",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "mbsunstake",
+      "type": "mbsunstake",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "migrate",
+      "type": "migrate",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "migrate2",
+      "type": "migrate2",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "mintasset",
+      "type": "mintasset",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "mintbld",
+      "type": "mintbld",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "mintmbs",
+      "type": "mintmbs",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "mktbuy",
+      "type": "mktbuy",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "newuser",
+      "type": "newuser",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "noop",
+      "type": "noop",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "recover",
+      "type": "recover",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "repair",
+      "type": "repair",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmacc2fa",
+      "type": "rmacc2fa",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmanmconf",
+      "type": "rmanmconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmbldconf",
+      "type": "rmbldconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmblistacc",
+      "type": "rmblistacc",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmbreedconf",
+      "type": "rmbreedconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmcropconf",
+      "type": "rmcropconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmfcoinscan",
+      "type": "rmfcoinscan",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmitemconf",
+      "type": "rmitemconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmmktconf",
+      "type": "rmmktconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmsupport",
+      "type": "rmsupport",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "rmtktconf",
+      "type": "rmtktconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "runcleanup",
+      "type": "runcleanup",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "sendcoin",
+      "type": "sendcoin",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setacc2fa",
+      "type": "setacc2fa",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setanmconf",
+      "type": "setanmconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setbldconf",
+      "type": "setbldconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setbreedconf",
+      "type": "setbreedconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setcropconf",
+      "type": "setcropconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setfcoinscan",
+      "type": "setfcoinscan",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setitemconf",
+      "type": "setitemconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setmbscraft",
+      "type": "setmbscraft",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setmktconf",
+      "type": "setmktconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "setpartner",
+      "type": "setpartner",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "settktconf",
+      "type": "settktconf",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "suprm2fa",
+      "type": "suprm2fa",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "supsetfcscan",
+      "type": "supsetfcscan",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "unbreed",
+      "type": "unbreed",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "unstake",
+      "type": "unstake",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "verify2fa",
+      "type": "verify2fa",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "withdraw",
+      "type": "withdraw",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "withdrawcoin",
+      "type": "withdrawcoin",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [
+    {
+      "name": "account2fa",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "account2fa_table"
+    },
+    {
+      "name": "accounts",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "accounts_table"
+    },
+    {
+      "name": "animals",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "animals_table"
+    },
+    {
+      "name": "anmconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "anmconf_table"
+    },
+    {
+      "name": "blacklist",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "blacklist_table"
+    },
+    {
+      "name": "bldconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "bldconf_table"
+    },
+    {
+      "name": "breedconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "breedconf_table"
+    },
+    {
+      "name": "breedings",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "breedings_table"
+    },
+    {
+      "name": "buildings",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "buildings_table"
+    },
+    {
+      "name": "coinstake",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "coinstake_table"
+    },
+    {
+      "name": "config",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "config_table"
+    },
+    {
+      "name": "cropconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "cropconf_table"
+    },
+    {
+      "name": "crops",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "crops_table"
+    },
+    {
+      "name": "fcoinscan",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "fcoinscan_table"
+    },
+    {
+      "name": "itemconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "itemconf_table"
+    },
+    {
+      "name": "mbs",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "mbs_table"
+    },
+    {
+      "name": "mbsconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "mbsconf_table"
+    },
+    {
+      "name": "mbscraft",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "mbscraft_table"
+    },
+    {
+      "name": "mktconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "mktconf_table"
+    },
+    {
+      "name": "oracles",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "oracles_table"
+    },
+    {
+      "name": "packs",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "packs_table"
+    },
+    {
+      "name": "partners",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "partners_table"
+    },
+    {
+      "name": "rands",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "rands_table"
+    },
+    {
+      "name": "referrals",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "referrals_table"
+    },
+    {
+      "name": "rm2fareqs",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "rm2fareqs_table"
+    },
+    {
+      "name": "supports",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "supports_table"
+    },
+    {
+      "name": "tassets",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "tassets_table"
+    },
+    {
+      "name": "ticketconf",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "ticketconf_table"
+    },
+    {
+      "name": "time2fa",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "time2fa_table"
+    },
+    {
+      "name": "toolconfs",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "toolconfigs_table"
+    },
+    {
+      "name": "tools",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "tools_table"
+    },
+    {
+      "name": "u",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "u_table"
+    }
+  ],
+  "ricardian_clauses": [],
+  "error_messages": [],
+  "abi_extensions": [],
+  "variants": [],
+  "action_results": []
+}
