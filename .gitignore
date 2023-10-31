@@ -3,6 +3,7 @@ poetry.lock
 
 # Python
 *.py[cod]
+dist
 
 # Dev
 dev
