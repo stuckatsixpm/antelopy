@@ -2,17 +2,14 @@ import json
 import pytest
 from antelopy import AbiCache
 
-pytest_plugins = ("pytest_asyncio",)
 
-
-@pytest.mark.asyncio
-async def test_basic_action(abi_cache: AbiCache):
+def test_basic_action(abi_cache: AbiCache):
     mock = {
         "owner": "stuckatsixpm",
         "animal_id": 519,
         "reward_type": "TestReward",
         "reward_card": 111111,
-        "quantity": -135, # Testing Negative Fields
+        "quantity": -135,  # Testing Negative Fields
     }
     result = abi_cache.serialize_data(
         contract_name="farmersworld", contract_action="logclaimrs", data=mock
@@ -22,8 +19,7 @@ async def test_basic_action(abi_cache: AbiCache):
     ), f"serialization conversion failed: {result}"
 
 
-@pytest.mark.asyncio
-async def test_nested_data(abi_cache: AbiCache):
+def test_nested_data(abi_cache: AbiCache):
     mock = {
         "authorized_creator": "c4vr2.wam",
         "collection_name": "tag",
@@ -63,8 +59,7 @@ async def test_nested_data(abi_cache: AbiCache):
     ), f"serialization conversion failed: {result}"
 
 
-@pytest.mark.asyncio
-async def test_nested_numbers(abi_cache: AbiCache):
+def test_nested_numbers(abi_cache: AbiCache):
     # I couldn't find an on-chain contract that had float datatypes
     mock = {
         "authorized_creator": "c4vr2.wam",
@@ -90,8 +85,7 @@ async def test_nested_numbers(abi_cache: AbiCache):
     ), f"serialization conversion failed: {result}"
 
 
-@pytest.mark.asyncio
-async def test_complex_structure(abi_cache: AbiCache):
+def test_complex_structure(abi_cache: AbiCache):
     with open(r"tests\data\storehouse.blend", "r") as json_file:
         mock = json.load(json_file)
         mock["display_data"] = json.dumps(
@@ -111,13 +105,12 @@ async def test_complex_structure(abi_cache: AbiCache):
     ), f"serialization conversion failed: {result}"
 
 
-@pytest.mark.asyncio
-async def test_key_serialization(abi_cache: AbiCache):
+def test_key_serialization(abi_cache: AbiCache):
     mock = {
-        "creator":"2hcoo.c.wam",
-        "asset_ids":["1099525200476"],
-        "key":"EOS5o5CnexdMvaV83fbmNBQVhUAi6zuJQHm3vY4p2L2fzH7VUGp7p",
-        "memo":""
+        "creator": "2hcoo.c.wam",
+        "asset_ids": ["1099525200476"],
+        "key": "EOS5o5CnexdMvaV83fbmNBQVhUAi6zuJQHm3vY4p2L2fzH7VUGp7p",
+        "memo": "",
     }
 
     result = abi_cache.serialize_data(
@@ -128,15 +121,12 @@ async def test_key_serialization(abi_cache: AbiCache):
         == b"00a4e100014a511300027765c671e9a9dc0053796a96a5d2e80a04e97f97ea28e53efddb455157a7da1c015c1acf000001000000"
     ), f"serialization conversion failed: {result}"
 
-@pytest.mark.asyncio
-async def test_sig_serialization(abi_cache: AbiCache):
+
+def test_sig_serialization(abi_cache: AbiCache):
     mock = {
-        "claimer":
-"ok5e4.wam",
-"claimer_signature":
-"SIG_K1_KffgT96G1YtVPanSXvScJxYFideekGzBbL7RvP2jzJaYbkK8YTW1Wwg8ngDH1qtnDy2H2cFxxveivgqYPkUjD8B8Muvgut",
-"link_id":
-2736738
+        "claimer": "ok5e4.wam",
+        "claimer_signature": "SIG_K1_KffgT96G1YtVPanSXvScJxYFideekGzBbL7RvP2jzJaYbkK8YTW1Wwg8ngDH1qtnDy2H2cFxxveivgqYPkUjD8B8Muvgut",
+        "link_id": 2736738,
     }
 
     result = abi_cache.serialize_data(
