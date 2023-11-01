@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "antelopy"
-version = "0.1.0"
+version = "0.1.0a"
 description = "Python helper for Antelope transaction serialization"
 authors = ["Jake Hattwell <stuck@sixpm.dev>"]
 license = "MIT"

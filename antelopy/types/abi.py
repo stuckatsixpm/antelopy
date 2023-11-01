@@ -177,6 +177,8 @@ class Abi(AbiBaseClass):
                     value = float(value)
                 buf += struct.pack(DEFAULT_TYPES[t], value)
             case "string":
+                if not isinstance(value,str):
+                    raise ValueError(f"Expected a string for this field, got {type(value)} instead")
                 buf += varints.encode_int(len(value)) + value.encode("utf-8")
             case "bool":
                 buf += b"\x01" if value else b"\x00"

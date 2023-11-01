@@ -1,6 +1,6 @@
 # antelopy
 
-*v0.1.0 - WIP*
+*v0.1.0a - WIP*
 
 Drop-in Python ABI cache for Antelope chains with local serialization support. 
 
