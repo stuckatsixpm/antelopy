@@ -5,6 +5,10 @@ poetry.lock
 *.py[cod]
 dist
 
+#tests
+.coverage
+.tox
+
 # Dev
 dev
 .vscode

@@ -9,6 +9,9 @@ def test_string_to_name():
     assert (
         hexlify(names.str_to_name("c4vr2.wam")) == b'0000908603713741'
     ), "Name conversion from string to bytes failed"
+    assert (
+        hexlify(names.str_to_name("abcdefg12345a")) == b'56c810812d95d031'
+    ), "Name conversion from string to bytes failed"
 
 
 def test_name_to_string():
@@ -17,4 +20,7 @@ def test_name_to_string():
     ), "Name conversion from bytes to string failed"
     assert (
         names.name_to_str(unhexlify("0000908603713741")) == "c4vr2.wam"
+    ), "Name conversion from bytes to string failed"
+    assert (
+        names.name_to_str(unhexlify("56c810812d95d031")) == "abcdefg12345a"
     ), "Name conversion from bytes to string failed"

@@ -16,6 +16,8 @@ base58 = "^2.1.1"
 black = "^23.10.1"
 pytest = "^7.4.3"
 pylint = "^3.0.2"
+coverage = "^7.3.2"
+tox = "^4.11.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

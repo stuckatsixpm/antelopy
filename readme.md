@@ -12,3 +12,5 @@ Drop-in Python ABI cache for Antelope chains with local serialization support.
 ## Todo:
 * Implement remaining types
 * Implement better type hinting for serialization
+* Expand test coverage
+* Add examples
