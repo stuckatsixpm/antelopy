@@ -2,6 +2,7 @@
 
 Exceptions to help flag errors with serialization"""
 
+
 class ABINotFoundError(Exception):
     """No ABI found for account"""
 

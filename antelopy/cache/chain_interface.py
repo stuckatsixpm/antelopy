@@ -26,18 +26,16 @@ class ChainInterface:
         r = self.session.post(
             f"{self.endpoint}/v1/chain/get_abi", json={"account_name": account_name}
         )
-        match r.status_code:
-            case 500:
-                # TODO: Add specific errors
-                raise AccountNotFoundError(
-                    f"Couldn't find account {account_name}. Error JSON"
-                    + "\n"
-                    + r.json()
-                )
-            case 200:
-                pass
-            case _:
-                raise Exception("Couldn't get data from chain")
+        s = r.status_code
+        if s == 500:
+            # TODO: Add specific errors
+            raise AccountNotFoundError(
+                f"Couldn't find account {account_name}. Error JSON" + "\n" + r.json()
+            )
+        elif s == 200:
+            pass
+        else:
+            raise Exception("Couldn't get data from chain")
         if raw_abi := r.json().get("abi"):
             return raw_abi
         raise ABINotFoundError(f"Couldn't retrieve ABI for {account_name}")

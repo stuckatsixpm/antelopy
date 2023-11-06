@@ -6,9 +6,8 @@ Based off eosjs
 """
 
 
-def char_to_symbol(c:int) -> int:
-    """utility encoder from character int to symbol int
-    """
+def char_to_symbol(c: int) -> int:
+    """utility encoder from character int to symbol int"""
     if ord("a") <= c <= ord("z"):
         return c - ord("a") + 6
     if ord("1") <= c <= ord("5"):
@@ -16,7 +15,7 @@ def char_to_symbol(c:int) -> int:
     return 0
 
 
-def symbol_to_char(s:int) -> str:
+def symbol_to_char(s: int) -> str:
     """Utility encoder from symbol int to str"""
     if 6 <= s <= 31:
         return chr(ord("a") + s - 6)

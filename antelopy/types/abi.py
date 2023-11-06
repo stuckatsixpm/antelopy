@@ -128,9 +128,9 @@ class Abi(AbiBaseClass):
         super().__init__(**data)
         self.name = name
         for action in self.actions:
-            for struct in self.structs:
-                if action.name == struct.name:
-                    action.fields = struct.fields
+            for s in self.structs:
+                if action.name == s.name:
+                    action.fields = s.fields
                     break
 
     def get_action(self, action_name: str):
@@ -162,32 +162,42 @@ class Abi(AbiBaseClass):
             bytes: _description_
         """
         buf = b""
-        match t:
-            case "name":
-                buf += names.str_to_name(value)
-            case "uint8" | "uint16" | "uint32" | "uint64" | "int8" | "int16" | "int32" | "int64":
-                if not isinstance(value,int):
-                    value = int(value)
-                if value < 0:
-                    bit_length = int(t.split("int")[1])
-                    value = (1 << bit_length) + value  # quick two's compliment
-                buf += struct.pack(DEFAULT_TYPES[t], value)
-            case "float32" | "float64":
-                if not isinstance(value,float):
-                    value = float(value)
-                buf += struct.pack(DEFAULT_TYPES[t], value)
-            case "string":
-                if not isinstance(value,str):
-                    raise ValueError(f"Expected a string for this field, got {type(value)} instead")
-                buf += varints.encode_int(len(value)) + value.encode("utf-8")
-            case "bool":
-                buf += b"\x01" if value else b"\x00"
-            case "public_key":
-                buf += keys.string_to_public_key(value)
-            case "signature":
-                buf += keys.string_to_signature(value)
-            case _:
-                raise Exception(f"Type {t} isn't handled yet")
+        if t == "name":
+            buf += names.str_to_name(value)
+        elif t in (
+            "uint8",
+            "uint16",
+            "uint32",
+            "uint64",
+            "int8",
+            "int16",
+            "int32",
+            "int64",
+        ):
+            if not isinstance(value, int):
+                value = int(value)
+            if value < 0:
+                bit_length = int(t.split("int")[1])
+                value = (1 << bit_length) + value  # quick two's compliment
+            buf += struct.pack(DEFAULT_TYPES[t], value)
+        elif t in ("float32", "float64"):
+            if not isinstance(value, float):
+                value = float(value)
+            buf += struct.pack(DEFAULT_TYPES[t], value)
+        elif t == "string":
+            if not isinstance(value, str):
+                raise ValueError(
+                    f"Expected a string for this field, got {type(value)} instead"
+                )
+            buf += varints.encode_int(len(value)) + value.encode("utf-8")
+        elif t == "bool":
+            buf += b"\x01" if value else b"\x00"
+        elif t == "public_key":
+            buf += keys.string_to_public_key(value)
+        elif t == "signature":
+            buf += keys.string_to_signature(value)
+        else:
+            raise Exception(f"Type {t} isn't handled yet")
         return buf
 
     def serialize_list(self, t: AbiType, value: list[Any]) -> bytes:
@@ -198,7 +208,7 @@ class Abi(AbiBaseClass):
                 buf += self.serialize_default(cast(ValidTypes, t.type), i)
             else:
                 new_type = self.resolve_data_type(t.type)
-                if isinstance(new_type,AbiStruct):
+                if isinstance(new_type, AbiStruct):
                     buf += self.serialize(new_type, i)
                 else:
                     buf += self.serialize_non_default(new_type, i)
@@ -214,7 +224,7 @@ class Abi(AbiBaseClass):
             buf += self.serialize_default(value_type, v)
         else:
             new_type = self.resolve_data_type(value_type)
-            if isinstance(new_type,AbiStruct):
+            if isinstance(new_type, AbiStruct):
                 buf += self.serialize(new_type, v)
             else:
                 buf += self.serialize_non_default(new_type, v)
@@ -228,10 +238,9 @@ class Abi(AbiBaseClass):
         if t.is_list:
             buf += self.serialize_list(cast(AbiType, t), value)
             return buf
-        if isinstance(t.type,str) and t.type in DEFAULT_TYPES:
+        if isinstance(t.type, str) and t.type in DEFAULT_TYPES:
             buf += self.serialize_default(cast(ValidTypes, t.type), value)
             return buf
-        inner_type = self.resolve_data_type(t)
         if type_options := [nt for nt in self.types if t.type == nt.new_type_name]:
             buf += self.serialize_non_default(type_options[0], value)
         elif struct_options := [s for s in self.structs if t.type == s.name]:
