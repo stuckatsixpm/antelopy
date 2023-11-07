@@ -1,6 +1,6 @@
 # antelopy
 
-*v0.1.2 - initial release*
+*v0.1.3 - initial release*
 
 Drop-in Python ABI cache for Antelope chains with local serialization support. 
 
