@@ -25,4 +25,4 @@ jobs:
           pip install poetry
           poetry install
       - name: Run tox
-        run: poetry run tox -e py
+        run: poetry run tox -e py,coverage
