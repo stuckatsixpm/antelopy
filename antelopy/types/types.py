@@ -15,12 +15,12 @@ DEFAULT_TYPES = {
     "int128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
     "uint128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
     "varint32": "",  # TODO # Zigzag, to varuint
-    "varuint32": "",  # TODO #
+    "varuint32": "",  # TODO # varuint, pad to 32 bit
     "float32": "f",
     "float64": "d",
     "float128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
-    "time_point": "",  # TODO Check how datetimes are handled
-    "time_point_sec": "",  # TODO
+    "time_point": "",  
+    "time_point_sec": "",  
     "block_timestamp_type": "",  # TODO
     "name": "",
     "bytes": "",  # TODO
@@ -28,11 +28,11 @@ DEFAULT_TYPES = {
     "checksum160": "",  # TODO
     "checksum256": "",  # TODO
     "checksum512": "",  # TODO
-    "public_key": "",  # TODO
-    "signature": "",  # TODO
-    "symbol": "",  # TODO
-    "symbol_code": "",  # TODO
-    "asset": "",  # TODO
+    "public_key": "", 
+    "signature": "",  
+    "symbol": "",
+    "symbol_code": "", 
+    "asset": "", 
     "extended_asset": "",  # TODO
 }
 
