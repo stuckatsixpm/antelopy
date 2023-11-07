@@ -4,7 +4,7 @@ Varint Implementation based off https://github.com/fmoo/python-varint
 """
 
 
-def encode_int(n: int) -> bytes:
+def serialize_varint(n: int) -> bytes:
     """Encodes a positive integer as a varint
 
     Args:
@@ -27,7 +27,7 @@ def encode_int(n: int) -> bytes:
 
 # Stream conversion isn't needed for this project, and iterating
 # over the buffer to decode the varint is faster
-def decode_buf(n: bytes) -> tuple[int, bytes]:
+def deserialize_varint(n: bytes) -> tuple[int, bytes]:
     """Decodes a varint from bytes"""
     result = 0
     pos = 0

@@ -4,7 +4,7 @@ from typing import Any, cast
 from pydantic import BaseModel
 
 from ..exceptions.exceptions import ActionMissingFieldError
-from ..serializers import keys, names, varints
+from ..serializers import keys, names, varints, time_points
 from .types import DEFAULT_TYPES, ValidTypes
 
 
@@ -129,7 +129,7 @@ class Abi(AbiBaseClass):
         """
         buf = b""
         if t == "name":
-            buf += names.str_to_name(value)
+            buf += names.serialize_name(value)
         elif t in (
             "uint8",
             "uint16",
@@ -155,20 +155,24 @@ class Abi(AbiBaseClass):
                 raise ValueError(
                     f"Expected a string for this field, got {type(value)} instead"
                 )
-            buf += varints.encode_int(len(value)) + value.encode("utf-8")
+            buf += varints.serialize_varint(len(value)) + value.encode("utf-8")
         elif t == "bool":
             buf += b"\x01" if value else b"\x00"
         elif t == "public_key":
-            buf += keys.string_to_public_key(value)
+            buf += keys.serialize_public_key(value)
         elif t == "signature":
-            buf += keys.string_to_signature(value)
+            buf += keys.serialize_signature(value)
+        elif t == "time_point":
+            buf += time_points.serialize_time_point(value)
+        elif t == "time_point_sec":
+            buf += time_points.serialize_time_point_sec(value)
         else:
             raise Exception(f"Type {t} isn't handled yet")
         return buf
 
     def serialize_list(self, t: AbiType, value: list[Any]) -> bytes:
         buf = b""
-        buf += varints.encode_int(len(value))
+        buf += varints.serialize_varint(len(value))
         for i in value:
             if t.type in DEFAULT_TYPES:
                 buf += self.serialize_default(cast(ValidTypes, t.type), i)
@@ -185,7 +189,7 @@ class Abi(AbiBaseClass):
         buf = b""
 
         value_type, v = value
-        buf += varints.encode_int(variant_types.index(value_type))
+        buf += varints.serialize_varint(variant_types.index(value_type))
         if value_type in DEFAULT_TYPES:
             buf += self.serialize_default(value_type, v)
         else:

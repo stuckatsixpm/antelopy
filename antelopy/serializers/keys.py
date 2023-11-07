@@ -15,7 +15,7 @@ KEY_TYPES = {
 # based on eosjs-numeric.ts (EOSIO/eosjs)
 
 
-def string_to_public_key(s: str):
+def serialize_public_key(s: str):
     """Converts string key (EOS...) to bytes with leading key-type byte"""
     buf = b""
     if s[:3] == "EOS":
@@ -25,7 +25,7 @@ def string_to_public_key(s: str):
     return buf
 
 
-def string_to_signature(s: str):
+def serialize_signature(s: str):
     """Converts string signature (SIG_XX_...) to bytes with leading key-type byte"""
     key_type = KEY_TYPES[s[4:6].lower()]
     sig = s[7:]

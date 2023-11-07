@@ -5,7 +5,7 @@ from antelopy.serializers import keys
 def test_string_to_public_key():
     assert (
         hexlify(
-            keys.string_to_public_key(
+            keys.serialize_public_key(
                 "EOS5o5CnexdMvaV83fbmNBQVhUAi6zuJQHm3vY4p2L2fzH7VUGp7p"
             )
         )
@@ -16,7 +16,7 @@ def test_string_to_public_key():
 def test_string_to_signature():
     assert (
         hexlify(
-            keys.string_to_signature(
+            keys.serialize_signature(
                 "SIG_K1_K9Dr5zUy9qsvySPQ4fWFRXKuadDPcXo3hRkeyo4gMuE8D6uaRZbiWiCuZHEB51X1aoqP8q1jUGSVAW7Qxydu6GvDvKzfRt"
             )
         )

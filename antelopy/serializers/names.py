@@ -24,7 +24,7 @@ def symbol_to_char(s: int) -> str:
     return "."
 
 
-def str_to_name(s: str) -> bytes:
+def serialize_name(s: str) -> bytes:
     """Converts the string representation to an 8 byte Antelope name"""
     a = bytearray(8)
     bit = 63
@@ -39,7 +39,7 @@ def str_to_name(s: str) -> bytes:
     return a
 
 
-def name_to_str(v: bytes):
+def deserialize_name(v: bytes):
     """Converts an Antelope name (8 bytes) to string"""
     result = ""
     bit = 63
