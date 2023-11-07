@@ -12,6 +12,12 @@ Drop-in Python ABI cache for Antelope chains with local serialization support.
 ## Basic Usage:
 *Note: Reading ABIs uses `requests` and is not asynchronous.*
 
+### Instaliation
+
+```bash
+pip install antelopy
+```
+
 ### Example with aioeos
 **Loading a contract's ABI into the cache:**
 ```py

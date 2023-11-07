@@ -5,6 +5,7 @@ description = "Python helper for Antelope transaction serialization"
 authors = ["Jake Hattwell <stuck@sixpm.dev>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://python-poetry.org/"
 
 [tool.poetry.dependencies]
 python = "^3.10"
