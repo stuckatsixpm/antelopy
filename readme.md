@@ -1,6 +1,6 @@
 # antelopy
 
-*v0.1.1 - initial release*
+*v0.1.2 - initial release*
 
 Drop-in Python ABI cache for Antelope chains with local serialization support. 
 
@@ -34,6 +34,8 @@ abicache.read_abi("atomicassets")
 **Serializing, signing, and pushing a transaction** *(modified version of aioeos' built-in `EosTransaction.sign_and_push_transaction` function)*
 ```py
 import asyncio
+import binascii
+import hashlib
 from antelopy import AbiCache
 from aioeos import EosAccount, EosJsonRpc, EosTransaction, serializer
 
