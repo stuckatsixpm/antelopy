@@ -86,7 +86,7 @@ def test_nested_numbers(abi_cache: AbiCache):
 
 
 def test_complex_structure(abi_cache: AbiCache):
-    with open(r"tests\data\storehouse.blend", "r") as json_file:
+    with open("tests/data/storehouse.blend", "r") as json_file:
         mock = json.load(json_file)
         mock["display_data"] = json.dumps(
             {

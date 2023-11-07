@@ -19,8 +19,8 @@ DEFAULT_TYPES = {
     "float32": "f",
     "float64": "d",
     "float128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
-    "time_point": "",  
-    "time_point_sec": "",  
+    "time_point": "",
+    "time_point_sec": "",
     "block_timestamp_type": "",  # TODO
     "name": "",
     "bytes": "",
@@ -28,11 +28,11 @@ DEFAULT_TYPES = {
     "checksum160": "",  # TODO
     "checksum256": "",  # TODO
     "checksum512": "",  # TODO
-    "public_key": "", 
-    "signature": "",  
+    "public_key": "",
+    "signature": "",
     "symbol": "",
-    "symbol_code": "", 
-    "asset": "", 
+    "symbol_code": "",
+    "asset": "",
     "extended_asset": "",  # TODO
 }
 

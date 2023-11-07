@@ -1,10 +1,10 @@
 import struct
-from typing import Any, cast
+from typing import Any, List, Union, cast
 
 from pydantic import BaseModel
 
 from ..exceptions.exceptions import ActionMissingFieldError
-from ..serializers import keys, names, varints, time_points, assets
+from ..serializers import assets, keys, names, time_points, varints
 from .types import DEFAULT_TYPES, ValidTypes
 
 
@@ -46,14 +46,14 @@ class AbiStructField(AbiBaseClass):
 class AbiStruct(AbiBaseClass):
     name: str
     base: str
-    fields: list[AbiStructField]
+    fields: List[AbiStructField]
 
 
 class AbiAction(AbiBaseClass):
     name: str
     type: str
     ricardian_contract: str
-    fields: list[AbiStructField] = []
+    fields: List[AbiStructField] = []
 
 
 class AbiTables(AbiBaseClass):
@@ -74,20 +74,20 @@ class AbiExtensions(AbiBaseClass):
 
 class AbiVariants(AbiBaseClass):
     name: str
-    types: list[str]
+    types: List[str]
 
 
 class Abi(AbiBaseClass):
     name: str = ""
     version: str = ""
-    types: list[AbiType] = []
-    structs: list[AbiStruct] = []
-    actions: list[AbiAction] = []
-    tables: list[AbiTables] = []
-    ricardian_clauses: list[AbiRicardianClauses] = []
-    error_messages: list[AbiErrorMessages] = []
-    abi_extensions: list[AbiExtensions] = []
-    variants: list[AbiVariants] = []
+    types: List[AbiType] = []
+    structs: List[AbiStruct] = []
+    actions: List[AbiAction] = []
+    tables: List[AbiTables] = []
+    ricardian_clauses: List[AbiRicardianClauses] = []
+    error_messages: List[AbiErrorMessages] = []
+    abi_extensions: List[AbiExtensions] = []
+    variants: List[AbiVariants] = []
     # action_results: list = []
 
     def __init__(self, name: str, **data: Any):
@@ -104,7 +104,7 @@ class Abi(AbiBaseClass):
         if actions:
             return actions[0]
 
-    def resolve_data_type(self, field: AbiType | AbiStructField | str):
+    def resolve_data_type(self, field: Union[AbiType, AbiStructField, str]):
         # if field.type in DEFAULT_TYPES:
         #     return field.type
         field_type = str(field)
@@ -171,8 +171,8 @@ class Abi(AbiBaseClass):
         elif t == "symbol_code":
             buf += assets.serialize_symbol_code(value)
         elif t == "symbol":
-            precision,symbol_code = value.split(",")
-            buf += assets.serialize_symbol(int(precision),symbol_code)
+            precision, symbol_code = value.split(",")
+            buf += assets.serialize_symbol(int(precision), symbol_code)
         elif t == "asset":
             buf += assets.serialize_asset(value)
         elif t == "time_point":
@@ -183,7 +183,7 @@ class Abi(AbiBaseClass):
             raise Exception(f"Type {t} isn't handled yet")
         return buf
 
-    def serialize_list(self, t: AbiType, value: list[Any]) -> bytes:
+    def serialize_list(self, t: AbiType, value: List[Any]) -> bytes:
         buf = b""
         buf += varints.serialize_varint(len(value))
         for i in value:
@@ -198,7 +198,7 @@ class Abi(AbiBaseClass):
 
         return buf
 
-    def serialize_variant(self, variant_types: list[str], value: Any):
+    def serialize_variant(self, variant_types: List[str], value: Any):
         buf = b""
 
         value_type, v = value
@@ -214,7 +214,7 @@ class Abi(AbiBaseClass):
         return buf
 
     def serialize_non_default(
-        self, t: AbiType | AbiStructField | AbiVariants, value: Any
+        self, t: Union[AbiType, AbiStructField, AbiVariants], value: Any
     ) -> bytes:
         buf = b""
         # handle types which are just renamed default types
@@ -234,7 +234,7 @@ class Abi(AbiBaseClass):
             buf += self.serialize_variant(variant.types, value)
         return buf
 
-    def serialize(self, action: AbiAction | AbiStruct, data: Any) -> bytes:
+    def serialize(self, action: Union[AbiAction, AbiStruct], data: Any) -> bytes:
         buf = b""
         for field in action.fields:
             value = data.get(field.name)

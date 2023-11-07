@@ -4,9 +4,10 @@ Utility functions to serialize EOS keys and signatures into bytes"""
 
 import struct
 from datetime import datetime
+from typing import Union
 
 
-def serialize_time_point(value: int | float | datetime) -> bytes:
+def serialize_time_point(value: Union[int, float, datetime]) -> bytes:
     """Converts a datetime or datetime.timestamp float to serialized bytes with millisecond precision
 
     Args:
@@ -23,7 +24,7 @@ def serialize_time_point(value: int | float | datetime) -> bytes:
     return struct.pack("Q", value)
 
 
-def serialize_time_point_sec(value: int | float | datetime) -> bytes:
+def serialize_time_point_sec(value: Union[int, float, datetime]) -> bytes:
     """Converts a datetime or datetime.timestamp float to serialized bytes with second precision
 
     Args:

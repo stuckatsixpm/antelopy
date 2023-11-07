@@ -1,5 +1,5 @@
 import requests
-from typing import Any
+from typing import Any, Dict
 
 from ..exceptions.exceptions import AccountNotFoundError, ABINotFoundError
 
@@ -9,7 +9,7 @@ class ChainInterface:
         self.session = requests.Session()
         self.endpoint = chain_endpoint
 
-    def get_raw_abi(self, account_name: str) -> dict[str, Any]:
+    def get_raw_abi(self, account_name: str) -> Dict[str, Any]:
         """Reads a raw ABI file from chain
 
         Args:
@@ -21,7 +21,7 @@ class ChainInterface:
             ABINotFoundError: Account has no ABI
 
         Returns:
-            dict[str,Any]: _description_
+            Dict[str,Any]: _description_
         """
         r = self.session.post(
             f"{self.endpoint}/v1/chain/get_abi", json={"account_name": account_name}
