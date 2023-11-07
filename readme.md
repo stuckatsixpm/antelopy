@@ -1,6 +1,6 @@
 # antelopy
 
-*v0.1.0a - WIP*
+*v0.1.1 - initial release*
 
 Drop-in Python ABI cache for Antelope chains with local serialization support. 
 
@@ -76,9 +76,7 @@ await serialize_sign_and_push(transaction)
 
 ## Todo:
 * Implement remaining types
-  * varint32
-  * varuint32
 * refactor serializers to class based approach, similar to [aioeos](https://github.com/ulamlabs/aioeos/blob/master/aioeos/serializer.py)
 * Implement better type hinting for serialization
 * Expand test coverage
-* Add examples
+* Add examples for aioeos, eospy, and pyantelope
