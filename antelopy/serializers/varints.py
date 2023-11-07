@@ -2,6 +2,7 @@
 
 Varint Implementation based off https://github.com/fmoo/python-varint
 """
+from typing import Tuple
 
 
 def serialize_varint(n: int) -> bytes:
@@ -27,7 +28,7 @@ def serialize_varint(n: int) -> bytes:
 
 # Stream conversion isn't needed for this project, and iterating
 # over the buffer to decode the varint is faster
-def deserialize_varint(n: bytes) -> tuple[int, bytes]:
+def deserialize_varint(n: bytes) -> Tuple[int, bytes]:
     """Decodes a varint from bytes"""
     result = 0
     pos = 0

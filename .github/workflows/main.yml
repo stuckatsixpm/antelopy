@@ -1,5 +1,4 @@
-name: Test Package
-
+name: build
 on: 
   push:
       branches:
@@ -26,4 +25,4 @@ jobs:
           pip install poetry
           poetry install
       - name: Run tox
-        run: poetry run tox
+        run: poetry run tox -e py

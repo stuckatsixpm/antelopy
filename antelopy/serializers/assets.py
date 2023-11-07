@@ -21,6 +21,7 @@ def serialize_symbol_code(symbol_name: str) -> bytes:
         symbol_bytes += b"\x00"
     return symbol_bytes
 
+
 # Symbol consists of precision,symbol_name uint8, string
 # String gets padded to uint64
 def serialize_symbol(precision: int, symbol_name: str) -> bytes:

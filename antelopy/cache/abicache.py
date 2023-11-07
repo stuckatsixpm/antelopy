@@ -4,7 +4,7 @@ Core class of abicache package"""
 
 import json
 from binascii import hexlify
-from typing import Any
+from typing import Any, Dict
 from ..exceptions.exceptions import ABINotCachedError, ActionNotFoundError
 from ..types.abi import Abi, Abi
 from .chain_interface import ChainInterface
@@ -13,7 +13,7 @@ from .chain_interface import ChainInterface
 class AbiCache:
     def __init__(self, chain_endpoint: str):
         self.chain = ChainInterface(chain_endpoint)
-        self.abi_cache: dict[str, Abi] = {}
+        self.abi_cache: Dict[str, Abi] = {}
 
     def dump_abi(self, account_name: str, path: str) -> None:
         """Dumps an ABI of an account into path
@@ -45,14 +45,14 @@ class AbiCache:
         self.abi_cache[account_name] = Abi(name=account_name, **abi)
 
     def serialize_data(
-        self, contract_name: str, contract_action: str, data: dict[str, Any]
+        self, contract_name: str, contract_action: str, data: Dict[str, Any]
     ) -> bytes:
         """Serializes an action into a hex-encoded bytestring
 
         Args:
             contract_name (str): smart contract name
             contract_action (str): smart contract action
-            data (dict[str, Any]): action data
+            data (Dict[str, Any]): action data
 
         Raises:
             Exception: _description_
