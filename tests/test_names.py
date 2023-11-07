@@ -2,7 +2,7 @@ from binascii import hexlify, unhexlify
 from antelopy.serializers import names
 
 
-def test_string_to_name():
+def test_serialize_name():
     assert (
         hexlify(names.serialize_name("stuckatsixpm")) == b"206b77381b8874c6"
     ), "Name conversion from string to bytes failed"
@@ -14,7 +14,7 @@ def test_string_to_name():
     ), "Name conversion from string to bytes failed"
 
 
-def test_name_to_string():
+def test_deserialize_name():
     assert (
         names.deserialize_name(unhexlify("206b77381b8874c6")) == "stuckatsixpm"
     ), "Name conversion from bytes to string failed"

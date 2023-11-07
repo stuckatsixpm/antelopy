@@ -4,7 +4,7 @@ from typing import Any, cast
 from pydantic import BaseModel
 
 from ..exceptions.exceptions import ActionMissingFieldError
-from ..serializers import keys, names, varints, time_points
+from ..serializers import keys, names, varints, time_points, assets
 from .types import DEFAULT_TYPES, ValidTypes
 
 
@@ -156,12 +156,25 @@ class Abi(AbiBaseClass):
                     f"Expected a string for this field, got {type(value)} instead"
                 )
             buf += varints.serialize_varint(len(value)) + value.encode("utf-8")
+        elif t == "bytes":
+            if not isinstance(value, bytes):
+                raise ValueError(
+                    f"Expected a bytes object for this field, got {type(value)} instead"
+                )
+            buf += varints.serialize_varint(len(value)) + value
         elif t == "bool":
             buf += b"\x01" if value else b"\x00"
         elif t == "public_key":
             buf += keys.serialize_public_key(value)
         elif t == "signature":
             buf += keys.serialize_signature(value)
+        elif t == "symbol_code":
+            buf += assets.serialize_symbol_code(value)
+        elif t == "symbol":
+            precision,symbol_code = value.split(",")
+            buf += assets.serialize_symbol(int(precision),symbol_code)
+        elif t == "asset":
+            buf += assets.serialize_asset(value)
         elif t == "time_point":
             buf += time_points.serialize_time_point(value)
         elif t == "time_point_sec":

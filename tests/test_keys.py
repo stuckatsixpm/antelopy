@@ -2,7 +2,7 @@ from binascii import hexlify
 from antelopy.serializers import keys
 
 
-def test_string_to_public_key():
+def test_serialize_key():
     assert (
         hexlify(
             keys.serialize_public_key(
@@ -13,7 +13,7 @@ def test_string_to_public_key():
     ), "EOS Public Key to Key bytes failed"
 
 
-def test_string_to_signature():
+def test_serialize_signature():
     assert (
         hexlify(
             keys.serialize_signature(

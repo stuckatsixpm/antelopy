@@ -23,7 +23,7 @@ DEFAULT_TYPES = {
     "time_point_sec": "",  
     "block_timestamp_type": "",  # TODO
     "name": "",
-    "bytes": "",  # TODO
+    "bytes": "",
     "string": "",
     "checksum160": "",  # TODO
     "checksum256": "",  # TODO
