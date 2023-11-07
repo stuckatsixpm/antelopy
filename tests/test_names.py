@@ -4,13 +4,13 @@ from antelopy.serializers import names
 
 def test_string_to_name():
     assert (
-        hexlify(names.str_to_name("stuckatsixpm")) == b'206b77381b8874c6'
+        hexlify(names.str_to_name("stuckatsixpm")) == b"206b77381b8874c6"
     ), "Name conversion from string to bytes failed"
     assert (
-        hexlify(names.str_to_name("c4vr2.wam")) == b'0000908603713741'
+        hexlify(names.str_to_name("c4vr2.wam")) == b"0000908603713741"
     ), "Name conversion from string to bytes failed"
     assert (
-        hexlify(names.str_to_name("abcdefg12345a")) == b'56c810812d95d031'
+        hexlify(names.str_to_name("abcdefg12345a")) == b"56c810812d95d031"
     ), "Name conversion from string to bytes failed"
 
 
