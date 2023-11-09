@@ -136,3 +136,57 @@ def test_sig_serialization(abi_cache: AbiCache):
         result
         == b"62c22900000000000000908603a20aa400205377f146bd493e579aede69a77ba0fe51f94aa2b559de838ee354291d800908c60248991332d48f492717226cd37f6c75bdf3d14b79178e381099166a1878c25"
     ), f"serialization conversion failed: {result}"
+
+
+def test_gift_link_creation(abi_cache: AbiCache):
+    # generate atomic gift link
+    mock_1 = {
+        "asset_ids": ["1099903907686"],
+        "from": "stuckatsixpm",
+        "memo": "link",
+        "to": "atomictoolsx",
+    }
+    mock_2 = {
+        "asset_ids": ["1099903907686"],
+        "creator": "stuckatsixpm",
+        "key": "EOS7Q97LRz76jaK64bYB8o2ufAbWkVNTJCdAicvMtQSGvkB5AUJNj",
+        "memo": "Test Link",
+    }
+    serialized = [
+        abi_cache.serialize_data("atomicassets", "transfer", mock_1),
+        abi_cache.serialize_data("atomictoolsx", "announcelink", mock_2),
+    ]
+    assert serialized == [
+        b"206b77381b8874c6d071a434232769360166b7611700010000046c696e6b",
+        b"206b77381b8874c600034ab7e5d714dd38c9f034a6eaf86e7868ed50e86f73115bce7a12396f7a192f1b0166b76117000100000954657374204c696e6b",
+    ], "Gift link creation failed"
+
+    # generate atomic gift link with no memo
+    mock_1 = {
+        "asset_ids": ["1099903907686"],
+        "from": "stuckatsixpm",
+        "memo": "link",
+        "to": "atomictoolsx",
+    }
+    mock_2 = {
+        "asset_ids": ["1099903907686"],
+        "creator": "stuckatsixpm",
+        "key": "EOS8fYyfXRYxMFfhrnzyhVfrrZtxRFkU43eMrP1QEBs8wtw8mwf6t",
+        "memo": "",
+    }
+    serialized = [
+        abi_cache.serialize_data("atomicassets", "transfer", mock_1),
+        abi_cache.serialize_data("atomictoolsx", "announcelink", mock_2),
+    ]
+    assert serialized == [
+        b"206b77381b8874c6d071a434232769360166b7611700010000046c696e6b",
+        b"206b77381b8874c60003f1687debaaa354ce5e5798016cf3b76cbec2f6ec38e869b7a44769611ff286390166b761170001000000",
+    ], "Gift link creation failed"
+
+
+def test_gift_link_cancellation(abi_cache: AbiCache):
+    # cancel atomic gift link | Reference WAX trx: 61e29dc67ff4b82a984c83d5b2b71947433ccfba7c0548d61a6a9261103f7225
+    mock = {"link_id": 2769978}
+
+    serialized = abi_cache.serialize_data("atomictoolsx", "cancellink", mock)
+    assert serialized == b"3a442a0000000000", "Gift link cancellation failed"
