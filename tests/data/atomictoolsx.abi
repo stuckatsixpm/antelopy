@@ -1,0 +1,213 @@
+{
+  "version": "eosio::abi/1.1",
+  "types": [],
+  "structs": [
+    {
+      "name": "announcelink",
+      "base": "",
+      "fields": [
+        {
+          "name": "creator",
+          "type": "name"
+        },
+        {
+          "name": "key",
+          "type": "public_key"
+        },
+        {
+          "name": "asset_ids",
+          "type": "uint64[]"
+        },
+        {
+          "name": "memo",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "base": "",
+      "fields": [
+        {
+          "name": "nonce",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "cancellink",
+      "base": "",
+      "fields": [
+        {
+          "name": "link_id",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "claimlink",
+      "base": "",
+      "fields": [
+        {
+          "name": "link_id",
+          "type": "uint64"
+        },
+        {
+          "name": "claimer",
+          "type": "name"
+        },
+        {
+          "name": "claimer_signature",
+          "type": "signature"
+        }
+      ]
+    },
+    {
+      "name": "config_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "version",
+          "type": "string"
+        },
+        {
+          "name": "link_counter",
+          "type": "uint64"
+        },
+        {
+          "name": "atomicassets_account",
+          "type": "name"
+        }
+      ]
+    },
+    {
+      "name": "init",
+      "base": "",
+      "fields": []
+    },
+    {
+      "name": "links_s",
+      "base": "",
+      "fields": [
+        {
+          "name": "link_id",
+          "type": "uint64"
+        },
+        {
+          "name": "creator",
+          "type": "name"
+        },
+        {
+          "name": "key",
+          "type": "public_key"
+        },
+        {
+          "name": "asset_ids",
+          "type": "uint64[]"
+        },
+        {
+          "name": "assets_transferred",
+          "type": "bool"
+        },
+        {
+          "name": "memo",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "loglinkstart",
+      "base": "",
+      "fields": [
+        {
+          "name": "link_id",
+          "type": "uint64"
+        }
+      ]
+    },
+    {
+      "name": "lognewlink",
+      "base": "",
+      "fields": [
+        {
+          "name": "link_id",
+          "type": "uint64"
+        },
+        {
+          "name": "creator",
+          "type": "name"
+        },
+        {
+          "name": "key",
+          "type": "public_key"
+        },
+        {
+          "name": "asset_ids",
+          "type": "uint64[]"
+        },
+        {
+          "name": "memo",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "announcelink",
+      "type": "announcelink",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "auth",
+      "type": "auth",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "cancellink",
+      "type": "cancellink",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "claimlink",
+      "type": "claimlink",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "init",
+      "type": "init",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "loglinkstart",
+      "type": "loglinkstart",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "lognewlink",
+      "type": "lognewlink",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [
+    {
+      "name": "config",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "config_s"
+    },
+    {
+      "name": "links",
+      "index_type": "i64",
+      "key_names": [],
+      "key_types": [],
+      "type": "links_s"
+    }
+  ],
+  "ricardian_clauses": [],
+  "error_messages": [],
+  "abi_extensions": [],
+  "variants": [],
+  "action_results": []
+}
