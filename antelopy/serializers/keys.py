@@ -22,6 +22,12 @@ def serialize_public_key(s: str):
         key_type = KEY_TYPES["k1"]
         buf += struct.pack("b", key_type)
         buf += base58.b58decode(s[3:])[:-4]
+    elif s[:3] == "PUB":
+        key_type = KEY_TYPES[s[4:6].lower()]
+        sig = s[7:]
+        buf = b""
+        buf += struct.pack("b", key_type)
+        buf += base58.b58decode(sig)[:-4]
     return buf
 
 
