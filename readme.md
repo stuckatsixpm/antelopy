@@ -2,7 +2,7 @@
 
 ![Workflow Badge](https://github.com/stuckatsixpm/antelopy/actions/workflows/main.yml/badge.svg?branch=main) ![Python version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue) ![PyPI](https://img.shields.io/pypi/v/antelopy?label=PyPI)
 
-*v0.1.3 - initial release*
+*v0.1.4 - initial release*
 
 Drop-in Python ABI cache for Antelope chains with local serialization support. 
 

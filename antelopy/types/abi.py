@@ -204,7 +204,7 @@ class Abi(AbiBaseClass):
             raise Exception(f"Type {t} isn't handled yet")
         return buf
 
-    def serialize_list(self, t: AbiType | AbiStructField, value: List[Any]) -> bytes:
+    def serialize_list(self, t: Union[AbiType, AbiStructField], value: List[Any]) -> bytes:
         buf = b""
         buf += varints.serialize_varint(len(value))
         for i in value:
