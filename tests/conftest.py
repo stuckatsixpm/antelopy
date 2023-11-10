@@ -10,6 +10,7 @@ def abi_cache():
     cache.read_abi_from_json("craft.tag", "tests/data/craft.tag.abi")
     cache.read_abi_from_json("atomicassets", "tests/data/atomicassets.abi")
     cache.read_abi_from_json("farmersworld", "tests/data/farmersworld.abi")
+    cache.read_abi_from_json("mock", "tests/data/mock.abi")
     # read from chain
     cache.read_abi("atomictoolsx")
     return cache

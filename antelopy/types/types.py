@@ -25,9 +25,9 @@ DEFAULT_TYPES = {
     "name": "",
     "bytes": "",
     "string": "",
-    "checksum160": "",  # TODO
-    "checksum256": "",  # TODO
-    "checksum512": "",  # TODO
+    "checksum160": "",
+    "checksum256": "",
+    "checksum512": "",
     "public_key": "",
     "signature": "",
     "symbol": "",

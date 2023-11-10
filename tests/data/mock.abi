@@ -1,0 +1,38 @@
+{
+  "version": "eosio::abi/1.2",
+  "types": [
+  ],
+  "structs": [
+    {
+      "name": "chksummock",
+      "base": "",
+      "fields": [
+        {
+          "name": "c160",
+          "type": "checksum160"
+        },
+        {
+          "name": "c256",
+          "type": "checksum256"
+        },
+        {
+          "name": "c512",
+          "type": "checksum512"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "name": "chksummock",
+      "type": "chksummock",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [],
+  "ricardian_clauses": [],
+  "error_messages": [],
+  "abi_extensions": [],
+  "variants": [],
+  "action_results": []
+}
