@@ -1,3 +1,4 @@
+import binascii
 import struct
 from typing import Any, List, Union, cast
 
@@ -179,6 +180,19 @@ class Abi(AbiBaseClass):
             buf += time_points.serialize_time_point(value)
         elif t == "time_point_sec":
             buf += time_points.serialize_time_point_sec(value)
+        elif t.startswith("checksum"):
+            if isinstance(value, str):
+                buf += bytes.fromhex(value)
+            elif isinstance(value, bytes):
+                try:
+                    # test if hex-encoded bytes
+                    value = binascii.unhexlify(value)
+                except:
+                    ...
+                if len(value) in [20, 32, 64]:
+                    buf += value
+            else:
+                raise ValueError(f"serializing checksums expects str or bytes format")
         else:
             raise Exception(f"Type {t} isn't handled yet")
         return buf
