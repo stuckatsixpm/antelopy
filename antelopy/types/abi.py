@@ -33,12 +33,15 @@ class AbiType(AbiBaseClass):
 
 class AbiStructField(AbiBaseClass):
     name: str
+    optional: bool = True
 
     def __init__(self, **data: Any):
         super().__init__(**data)
         if self.type.endswith("[]"):
             self.is_list = True
             self.type = self.type[:-2]
+        if self.type.endswith("$"):
+            self.optional = True
 
     def __str__(self):
         return self.type
@@ -180,6 +183,10 @@ class Abi(AbiBaseClass):
             buf += time_points.serialize_time_point(value)
         elif t == "time_point_sec":
             buf += time_points.serialize_time_point_sec(value)
+        elif t in ["varuint32","varint32"]:
+            if t == "varint32":
+                value = (value << 1) ^ (value >> 31) # 32-1
+            buf += varints.serialize_varint(value)
         elif t.startswith("checksum"):
             if isinstance(value, str):
                 buf += bytes.fromhex(value)
@@ -197,7 +204,7 @@ class Abi(AbiBaseClass):
             raise Exception(f"Type {t} isn't handled yet")
         return buf
 
-    def serialize_list(self, t: AbiType, value: List[Any]) -> bytes:
+    def serialize_list(self, t: AbiType | AbiStructField, value: List[Any]) -> bytes:
         buf = b""
         buf += varints.serialize_varint(len(value))
         for i in value:
@@ -233,7 +240,7 @@ class Abi(AbiBaseClass):
         buf = b""
         # handle types which are just renamed default types
         if t.is_list:
-            buf += self.serialize_list(cast(AbiType, t), value)
+            buf += self.serialize_list(cast(Union[AbiType, AbiStructField], t), value)
             return buf
         if isinstance(t.type, str) and t.type in DEFAULT_TYPES:
             buf += self.serialize_default(cast(ValidTypes, t.type), value)
@@ -253,13 +260,14 @@ class Abi(AbiBaseClass):
         for field in action.fields:
             value = data.get(field.name)
             if value is None:
+                if field.optional:
+                    continue
                 raise ActionMissingFieldError(
                     f"Action {action.name} is missing field {field.name}"
                 )
 
             if field.type in DEFAULT_TYPES and not field.is_list:
                 buf += self.serialize_default(cast(ValidTypes, field.type), value)
-                # t = [t for t in self.types if t.new_type_name == field.type][0]
                 continue
             buf += self.serialize_non_default(field, value)
         return buf

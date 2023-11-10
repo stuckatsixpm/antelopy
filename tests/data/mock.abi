@@ -20,12 +20,31 @@
           "type": "checksum512"
         }
       ]
+    },
+    {
+      "name": "varintmock",
+      "base": "",
+      "fields": [
+        {
+          "name": "vuint32",
+          "type": "varuint32"
+        },
+        {
+          "name": "vint32",
+          "type": "varint32"
+        }
+      ]
     }
   ],
   "actions": [
     {
       "name": "chksummock",
       "type": "chksummock",
+      "ricardian_contract": ""
+    },
+    {
+      "name": "varintmock",
+      "type": "varintmock",
       "ricardian_contract": ""
     }
   ],
