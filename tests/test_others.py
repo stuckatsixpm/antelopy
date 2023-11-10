@@ -16,3 +16,13 @@ def test_serialize_checksums(abi_cache: AbiCache):
     assert (
         s == data["c160"].encode() + hexlify(data["c256"]) + data["c512"]
     ), "checksum conversion failed"
+
+def test_serialize_abi_varints(abi_cache: AbiCache):
+    data = {
+        "vuint32": 4294967295,
+        "vint32": -2147483647
+    }
+    s = abi_cache.serialize_data("mock", "varintmock", data)
+    assert (
+        s == b''
+    ), "varint conversion failed"
