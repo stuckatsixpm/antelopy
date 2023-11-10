@@ -24,5 +24,5 @@ def test_serialize_abi_varints(abi_cache: AbiCache):
     }
     s = abi_cache.serialize_data("mock", "varintmock", data)
     assert (
-        s == b''
+        s == b'ffffffff0ffdffffff0f'
     ), "varint conversion failed"
