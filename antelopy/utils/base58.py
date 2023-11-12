@@ -10,7 +10,7 @@ alphabet = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 
 def b58encode(b: Union[bytes, str]) -> bytes:
     if isinstance(b, str):
-        b = b.encode()
+        b = b.encode("ascii")
     r = b""
     zeros = 0
     for i in b:
@@ -21,14 +21,14 @@ def b58encode(b: Union[bytes, str]) -> bytes:
     n = int.from_bytes(b, "big")
     pos = 0
     while n:
-        n,mod = divmod(n,58)
+        n, mod = divmod(n, 58)
         r = alphabet[mod].encode() + r
     return b"1" * zeros + r
 
 
 def b58decode(b: Union[bytes, str]) -> bytes:
     if isinstance(b, str):
-        b = b.encode()
+        b = b.encode("ascii")
     ones = 0
     for i in b:
         if chr(i) == "1":
