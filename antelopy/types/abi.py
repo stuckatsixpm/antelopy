@@ -183,9 +183,9 @@ class Abi(AbiBaseClass):
             buf += time_points.serialize_time_point(value)
         elif t == "time_point_sec":
             buf += time_points.serialize_time_point_sec(value)
-        elif t in ["varuint32","varint32"]:
+        elif t in ["varuint32", "varint32"]:
             if t == "varint32":
-                value = (value << 1) ^ (value >> 31) # 32-1
+                value = (value << 1) ^ (value >> 31)  # 32-1
             buf += varints.serialize_varint(value)
         elif t.startswith("checksum"):
             if isinstance(value, str):
@@ -204,7 +204,9 @@ class Abi(AbiBaseClass):
             raise Exception(f"Type {t} isn't handled yet")
         return buf
 
-    def serialize_list(self, t: Union[AbiType, AbiStructField], value: List[Any]) -> bytes:
+    def serialize_list(
+        self, t: Union[AbiType, AbiStructField], value: List[Any]
+    ) -> bytes:
         buf = b""
         buf += varints.serialize_varint(len(value))
         for i in value:

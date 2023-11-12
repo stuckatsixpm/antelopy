@@ -1,17 +1,16 @@
 [tool.poetry]
 name = "antelopy"
-version = "0.1.4"
+version = "0.1.5"
 description = "Python helper for Antelope transaction serialization"
 authors = ["Jake Hattwell <stuck@sixpm.dev>"]
 license = "MIT"
 readme = "readme.md"
-homepage = "https://python-poetry.org/"
+homepage = "https://github.com/stuckatsixpm/antelopy"
 
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.31.0"
 pydantic = "^2.4.2"
-base58 = "2.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^23.10.1"

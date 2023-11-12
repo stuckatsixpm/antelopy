@@ -3,8 +3,7 @@
 Utility functions to serialize EOS keys and signatures into bytes"""
 
 import struct
-
-import base58
+from ..utils.base58 import b58decode, b58encode
 
 KEY_TYPES = {
     "k1": 0,
@@ -21,13 +20,13 @@ def serialize_public_key(s: str):
     if s[:3] == "EOS":
         key_type = KEY_TYPES["k1"]
         buf += struct.pack("b", key_type)
-        buf += base58.b58decode(s[3:])[:-4]
+        buf += b58decode(s[3:])[:-4]
     elif s[:3] == "PUB":
         key_type = KEY_TYPES[s[4:6].lower()]
         sig = s[7:]
         buf = b""
         buf += struct.pack("b", key_type)
-        buf += base58.b58decode(sig)[:-4]
+        buf += b58decode(sig)[:-4]
     return buf
 
 
@@ -37,5 +36,5 @@ def serialize_signature(s: str):
     sig = s[7:]
     buf = b""
     buf += struct.pack("b", key_type)
-    buf += base58.b58decode(sig)[:-4]
+    buf += b58decode(sig)[:-4]
     return buf
