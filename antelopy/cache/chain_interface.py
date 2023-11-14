@@ -1,7 +1,8 @@
-import requests
 from typing import Any, Dict
 
-from ..exceptions.exceptions import AccountNotFoundError, ABINotFoundError
+import requests
+
+from antelopy.exceptions.exceptions import ABINotFoundError, AccountNotFoundError
 
 
 class ChainInterface:
@@ -32,7 +33,7 @@ class ChainInterface:
             raise AccountNotFoundError(
                 f"Couldn't find account {account_name}. Error JSON" + "\n" + r.json()
             )
-        elif s == 200:
+        if s == 200:
             pass
         else:
             raise Exception("Couldn't get data from chain")

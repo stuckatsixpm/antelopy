@@ -1,12 +1,14 @@
+"""abi.py
+Contains the Abi type classes for ABI interactions"""
 import binascii
 import struct
 from typing import Any, List, Union, cast
 
 from pydantic import BaseModel
 
-from ..exceptions.exceptions import ActionMissingFieldError
-from ..serializers import assets, keys, names, time_points, varints
-from .types import DEFAULT_TYPES, ValidTypes
+from antelopy.exceptions.exceptions import ActionMissingFieldError
+from antelopy.serializers import assets, keys, names, time_points, varints
+from antelopy.types.types import DEFAULT_TYPES, ValidTypes
 
 
 class AbiBaseClass(BaseModel):
@@ -107,6 +109,7 @@ class Abi(AbiBaseClass):
         actions = [a for a in self.actions if a.name == action_name]
         if actions:
             return actions[0]
+        return None
 
     def resolve_data_type(self, field: Union[AbiType, AbiStructField, str]):
         # if field.type in DEFAULT_TYPES:
@@ -194,12 +197,12 @@ class Abi(AbiBaseClass):
                 try:
                     # test if hex-encoded bytes
                     value = binascii.unhexlify(value)
-                except:
+                except binascii.Error:
                     ...
                 if len(value) in [20, 32, 64]:
                     buf += value
             else:
-                raise ValueError(f"serializing checksums expects str or bytes format")
+                raise ValueError("serializing checksums expects str or bytes format")
         else:
             raise Exception(f"Type {t} isn't handled yet")
         return buf
