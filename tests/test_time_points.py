@@ -1,5 +1,6 @@
 from binascii import hexlify
 from datetime import datetime
+
 from antelopy.serializers import time_points
 
 

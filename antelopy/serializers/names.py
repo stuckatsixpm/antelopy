@@ -19,7 +19,7 @@ def symbol_to_char(s: int) -> str:
     """Utility encoder from symbol int to str"""
     if 6 <= s <= 31:
         return chr(ord("a") + s - 6)
-    elif 1 <= s <= 5:
+    if 1 <= s <= 5:
         return chr(ord("1") + s - 1)
     return "."
 
@@ -28,8 +28,8 @@ def serialize_name(s: str) -> bytes:
     """Converts the string representation to an 8 byte Antelope name"""
     a = bytearray(8)
     bit = 63
-    for i in range(len(s)):
-        c = char_to_symbol(ord(s[i]))
+    for i in s:
+        c = char_to_symbol(ord(i))
         if bit < 5:
             c = c << 1
         for j in range(4, -1, -1):
@@ -45,7 +45,7 @@ def deserialize_name(v: bytes):
     bit = 63
     while bit >= 0:
         c = 0
-        for i in range(0, 5):
+        for _ in range(0, 5):
             if bit >= 0:
                 c = (c << 1) | ((v[bit // 8] >> bit % 8) & 1)
                 bit -= 1

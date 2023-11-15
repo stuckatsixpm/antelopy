@@ -3,7 +3,8 @@
 Utility functions to serialize EOS keys and signatures into bytes"""
 
 import struct
-from ..utils.base58 import b58decode, b58encode
+
+from antelopy.utils.base58 import b58decode
 
 KEY_TYPES = {
     "k1": 0,

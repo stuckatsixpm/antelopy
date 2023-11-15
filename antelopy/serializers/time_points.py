@@ -8,7 +8,8 @@ from typing import Union
 
 
 def serialize_time_point(value: Union[int, float, datetime]) -> bytes:
-    """Converts a datetime or datetime.timestamp float to serialized bytes with millisecond precision
+    """Converts a datetime or datetime.timestamp float to serialized bytes with millisecond
+    precision
 
     Args:
         timestamp (float | datetime): ts

@@ -4,14 +4,14 @@ from typing import Literal
 # The default types for Antelope, and the `struct` module format string where relevant
 DEFAULT_TYPES = {
     "bool": "",
-    "int8": "B",
-    "uint8": "b",
-    "int16": "H",
-    "uint16": "h",
-    "int32": "I",
-    "uint32": "i",
-    "int64": "Q",
-    "uint64": "q",
+    "int8": "b",
+    "uint8": "B",
+    "int16": "h",
+    "uint16": "H",
+    "int32": "i",
+    "uint32": "I",
+    "int64": "q",
+    "uint64": "Q",
     "int128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
     "uint128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
     "varint32": "",

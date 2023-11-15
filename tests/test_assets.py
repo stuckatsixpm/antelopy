@@ -1,4 +1,5 @@
 from binascii import hexlify
+
 from antelopy.serializers import assets
 
 
