@@ -2,9 +2,10 @@
 
 Core class of abicache package"""
 
+import binascii
+import hashlib
 import json
-from binascii import hexlify
-from typing import Any, Dict
+from typing import Any, Dict, Union
 
 from antelopy.cache.chain_interface import ChainInterface
 from antelopy.exceptions.exceptions import ABINotCachedError, ActionNotFoundError
@@ -88,4 +89,16 @@ class AbiCache:
             raise ActionNotFoundError(
                 f"Action {contract_action} not found in ABI for {contract_name}"
             )
-        return hexlify(abi.serialize(action, data))
+        return binascii.hexlify(abi.serialize(action, data))
+
+    def hexlify(self, data: bytes) -> bytes:
+        """Wrapper around binascii.hexlify to avoid extra imports"""
+        return binascii.hexlify(data)
+
+    def unhexlify(self, data: Union[bytes, str]) -> bytes:
+        """Wrapper around binascii.unhexlify to avoid extra imports"""
+        return binascii.unhexlify(data)
+
+    def sha256digest(self, string: bytes) -> bytes:
+        """Wrapper around hashlib.sha256().digest()"""
+        return hashlib.sha256(string).digest()
