@@ -36,8 +36,6 @@ abicache.read_abi("atomicassets")
 **Serializing, signing, and pushing a transaction** *(modified version of aioeos' built-in `EosTransaction.sign_and_push_transaction` function)*
 ```py
 import asyncio
-import binascii
-import hashlib
 from antelopy import AbiCache
 from aioeos import EosAccount, EosJsonRpc, EosTransaction, serializer
 
@@ -65,19 +63,19 @@ async def serialize_sign_and_push(transaction: EosTransaction):
             # This {"binargs": serialized_data} structure emulates
             # the response from the old `abi_json_to_bin` endpoint.
             abi_bin = {"binargs":abicache.serialize_data(action.account,action.name, action.data)}
-            action.data = binascii.unhexlify(abi_bin['binargs'])
+            action.data = abi_cache.unhexlify(abi_bin['binargs'])
 
     chain_id = await RPC.get_chain_id()
     serialized_transaction = serializer.serialize(transaction)
 
-    digest = hashlib.sha256(
+    digest = abi_cache.sha256digest(
         b''.join((chain_id, serialized_transaction, bytes(32)))
-    ).digest()
+    )
 
     return await RPC.push_transaction(
         signatures=[key.sign(digest) for key in [wax_account.key]],
         serialized_transaction=(
-            binascii.hexlify(serialized_transaction).decode()
+            abi_cache.hexlify(serialized_transaction).decode()
         )
     )
 
