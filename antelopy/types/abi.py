@@ -149,9 +149,6 @@ class Abi(AbiBaseClass):
         ):
             if not isinstance(value, int):
                 value = int(value)
-            # if value < 0:
-            #     bit_length = int(t.split("int")[1])
-            #     value = (1 << bit_length) + value  # quick two's compliment
             buf += struct.pack(DEFAULT_TYPES[t], value)
         elif t in ("float32", "float64"):
             if not isinstance(value, float):

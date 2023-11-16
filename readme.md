@@ -79,7 +79,7 @@ async def serialize_sign_and_push(transaction: EosTransaction):
         )
     )
 
-await serialize_sign_and_push(transaction)
+asyncio.run(serialize_sign_and_push(transaction))
 ```
 
 ## Todo:
@@ -87,4 +87,4 @@ await serialize_sign_and_push(transaction)
 * refactor serializers to class based approach, similar to [aioeos](https://github.com/ulamlabs/aioeos/blob/master/aioeos/serializer.py)
 * Implement better type hinting for serialization
 * Expand test coverage
-* Add examples for aioeos, eospy, and pyantelope
+* Add examples for aioeos, eospy, and pyntelope
