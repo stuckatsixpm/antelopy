@@ -42,8 +42,8 @@ from aioeos import EosAccount, EosJsonRpc, EosTransaction, serializer
 CHAIN_ENDPOINT = "https://wax.eosphere.io"
 
 # Create ABI Cache and read the Atomic Assets contract ABI
-abicache = AbiCache(chain_endpoint=CHAIN_ENDPOINT)
-abicache.read_abi("atomicassets")
+abi_cache = AbiCache(chain_endpoint=CHAIN_ENDPOINT)
+abi_cache.read_abi("atomicassets")
 
 # Fake Account
 wax_account = EosAccount(
@@ -62,7 +62,7 @@ async def serialize_sign_and_push(transaction: EosTransaction):
         if isinstance(action.data, dict):
             # This {"binargs": serialized_data} structure emulates
             # the response from the old `abi_json_to_bin` endpoint.
-            abi_bin = {"binargs":abicache.serialize_data(action.account,action.name, action.data)}
+            abi_bin = {"binargs":abi_cache.serialize_data(action.account,action.name, action.data)}
             action.data = abi_cache.unhexlify(abi_bin['binargs'])
 
     chain_id = await RPC.get_chain_id()
