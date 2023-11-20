@@ -28,8 +28,8 @@ from antelopy import AbiCache
 CHAIN_ENDPOINT = "https://wax.eosphere.io"
 
 # Create ABI Cache and read the Atomic Assets contract ABI
-abicache = AbiCache(chain_endpoint=CHAIN_ENDPOINT)
-abicache.read_abi("atomicassets")
+abi_cache = AbiCache(chain_endpoint=CHAIN_ENDPOINT)
+abi_cache.read_abi("atomicassets")
 ```
 
 
