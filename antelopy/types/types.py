@@ -12,8 +12,8 @@ DEFAULT_TYPES = {
     "uint32": "I",
     "int64": "q",
     "uint64": "Q",
-    "int128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
-    "uint128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
+    "int128": "", 
+    "uint128": "", 
     "varint32": "",
     "varuint32": "",
     "float32": "f",
