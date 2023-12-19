@@ -4,7 +4,7 @@ from antelopy.types import serializers
 
 
 class Serializable(Protocol):
-    def serialize(self):
+    def serialize(self) -> bytes:
         ...
 
     def deserialize(self):
@@ -20,22 +20,27 @@ class BasicSerializable(Serializable):
         return self.strategy.serialize(self.value)
 
     def deserialize(self):
-        return self.strategy.deserialize(self.value)
+        ...
 
 
 class ListSerializable(Serializable):
     def __init__(
-        self, values: List[Serializable], serialization_strategy: serializers.Serializer
+        self, values: List[Any], field_type: str = "", serialized: bool = False
     ):
         self.values = values
-        self.strategy = serialization_strategy
+        self.serialized = serialized
+        strategy = SERIALIZER_MAP.get(field_type)
+        self.strategy = strategy
 
     def serialize(self):
-        serialized_values = [v.serialize() for v in self.values]
-        return self.strategy.serialize(serialized_values)
+        if self.strategy and not self.serialized:
+            serialized_values = [self.strategy.serialize(v) for v in self.values]
+        else:
+            serialized_values = [bytes(b) for b in self.values]
+        return serializers.ListSerializer().serialize(serialized_values)
 
     def deserialize(self):
-        return self.strategy.deserialize(self.values)
+        ...
 
 
 class DictSerializable(Serializable):
@@ -51,7 +56,7 @@ class DictSerializable(Serializable):
         return self.strategy.serialize(self.values)
 
     def deserialize(self):
-        return self.strategy.deserialize(self.values)
+        ...
 
 
 SERIALIZER_MAP = {

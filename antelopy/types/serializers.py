@@ -1,7 +1,7 @@
 import binascii
 import struct
 from datetime import datetime
-from typing import Any, Protocol, Tuple, Union
+from typing import Any, List, Protocol, Tuple, Union
 
 from antelopy.serializers import assets, keys, names, time_points, varints
 from antelopy.types.types import DEFAULT_TYPES
@@ -64,6 +64,14 @@ class ChecksumSerializer(Serializer):
 
     def deserialize(self, v: Any) -> Any:
         ...
+
+
+class ListSerializer(Serializer):
+    def serialize(self, v: List[bytes]) -> bytes:
+        return varints.serialize_varint(len(v)) + b"".join(v)
+
+    def deserialize(self, v: bytes) -> str:
+        return names.deserialize_name(v)
 
 
 class NameSerializer(Serializer):
