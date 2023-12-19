@@ -1,6 +1,5 @@
 import json
-
-import pytest
+import logging
 
 from antelopy import AbiCache
 
