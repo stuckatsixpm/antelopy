@@ -204,17 +204,17 @@ class Abi(AbiBaseClass):
     #         raise Exception(f"Type {t} isn't handled yet")
     #     return buf
 
-    def find_type(self, name: str) -> AbiType | None:
+    def find_type(self, name: str) -> Union[AbiType, None]:
         type_options = [nt for nt in self.types if name == nt.new_type_name]
         if type_options:
             return type_options[0]
 
-    def find_struct(self, name: str) -> AbiStruct | None:
+    def find_struct(self, name: str) -> Union[AbiStruct, None]:
         struct_options = [s for s in self.structs if name == s.name]
         if struct_options:
             return struct_options[0]
 
-    def find_variant(self, name: str) -> AbiVariants | None:
+    def find_variant(self, name: str) -> Union[AbiVariants, None]:
         variant_options = [v for v in self.variants if name == v.name]
         if variant_options:
             return variant_options[0]
