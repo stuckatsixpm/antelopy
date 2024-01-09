@@ -12,13 +12,13 @@ DEFAULT_TYPES = {
     "uint32": "I",
     "int64": "q",
     "uint64": "Q",
-    "int128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
-    "uint128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
+    "int128": "",
+    "uint128": "",
     "varint32": "",
     "varuint32": "",
     "float32": "f",
     "float64": "d",
-    "float128": "",  # TODO Struct doesn't natively 128bit support, so split before encoding
+    "float128": "",  # XXX Doesn't work in Python
     "time_point": "",
     "time_point_sec": "",
     "block_timestamp_type": "",  # TODO

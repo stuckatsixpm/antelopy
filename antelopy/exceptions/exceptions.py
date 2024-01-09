@@ -21,3 +21,7 @@ class ActionNotFoundError(Exception):
 
 class ActionMissingFieldError(Exception):
     """Missing field in action serialization"""
+
+
+class SerializationError(Exception):
+    """Field was unable to be serialized"""
