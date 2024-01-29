@@ -8,30 +8,31 @@ TODO: Conversion from Signed to Packed
 
 from __future__ import annotations
 
-from typing import Any, Dict, List
-
-from pydantic import BaseModel
-
+from typing import Any, Dict, List, Union
+from dataclasses import asdict
+from pydantic import BaseModel, Field
+from datetime import datetime, timedelta
+from antelopy.exceptions import UnsupportedPackageError
 
 class Action(BaseModel):
-    account: str
-    name: str
+    account: str # Antelope Name
+    name: str # Antelope Name
     authorization: List[Authorization]
-    data: Dict[str, Any]
+    data: Union[bytes,Dict[str, Any]]
 
 
 class Authorization(BaseModel):
-    actor: str
-    permission: str
+    actor: str # Antelope Name
+    permission: str # Antelope Name
 
 
 class TransactionExtension(BaseModel):
-    actor: str
-    permission: str
+    type: int
+    data: bytes
 
 
 class Transaction(BaseModel):
-    expiration: str
+    expiration: datetime = Field(default_factory=lambda: datetime.now()+timedelta(seconds=120))
     ref_block_num: int = 0
     ref_block_prefix: int = 0
     max_net_usage_words: int = 0
@@ -40,6 +41,20 @@ class Transaction(BaseModel):
     context_free_actions: List[Action] = []
     actions: List[Action] = []
     transaction_extensions: List[TransactionExtension] = []
+
+    @classmethod
+    def from_ext(cls,package: str, trx:Any):
+        if package == "aioeos":    
+            trx = asdict(trx,dict_factory=dict)
+            return cls(**trx)
+
+        raise UnsupportedPackageError("This Antelope package isn't currently supported by Antelopy")
+        
+
+class PreSerializedTransaction(Transaction):
+    context_free_actions: List[bytes] = []
+    actions: List[bytes] = []
+    transaction_extensions: List[bytes] = []
 
 
 class SignedTransaction(Transaction):

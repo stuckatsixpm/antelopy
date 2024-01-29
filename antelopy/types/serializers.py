@@ -1,10 +1,17 @@
+from __future__ import annotations
+
 import binascii
 import struct
 from datetime import datetime
-from typing import Any, List, Protocol, Tuple, Union
-
+from typing import Any, List, Protocol, Tuple, Union, TYPE_CHECKING
+from antelopy.exceptions import ActionDataNotSerializedError, UnsupportedPackageError
 from antelopy.serializers import assets, keys, names, time_points, varints
+from antelopy.types.transaction import PreSerializedTransaction
+
 from antelopy.types.types import DEFAULT_TYPES
+
+if TYPE_CHECKING:
+    from antelopy.types.transaction import Action, Authorization, TransactionExtension
 
 
 def split_and_pack_128(n: int):
@@ -26,6 +33,27 @@ class Serializer(Protocol):
         ...
 
 
+class ActionSerializer(Serializer):
+    def serialize(self, v: Action) -> bytes:
+        buf = b''
+        a=AuthorizationSerializer()
+        buf += NameSerializer().serialize(v.account)
+        buf += NameSerializer().serialize(v.name)
+        buf += ListSerializer().serialize([a.serialize(auth) for auth in v.authorization])
+        if isinstance(v.data,bytes):
+            buf += VaruintSerializer().serialize(len(v.data))+v.data
+        else:
+            raise ActionDataNotSerializedError("Action data needs to be serialized before the action can be serialized")
+        # account: str
+        # name: str
+        # authorization: List[Authorization]
+        # data: Union[bytes,Dict[str, Any]]
+        return buf
+
+    def deserialize(self, v: Any) -> bytes:
+        ...
+
+
 class AssetSerializer(Serializer):
     def serialize(self, v: str) -> bytes:
         return assets.serialize_asset(v)
@@ -33,6 +61,13 @@ class AssetSerializer(Serializer):
     def deserialize(self, v: Any) -> bytes:
         ...
 
+class AuthorizationSerializer(Serializer):
+    def serialize(self, v: Authorization) -> bytes:
+        n = NameSerializer()
+        return n.serialize(v.actor)+n.serialize(v.permission)
+
+    def deserialize(self, v: Any) -> bytes:
+        return super().deserialize(v)
 
 class BooleanSerializer(Serializer):
     def serialize(self, v: bool) -> bytes:
@@ -163,6 +198,45 @@ class TimePointSecSerializer(Serializer):
     def deserialize(self, v: Any) -> Any:
         ...
 
+class TransactionSerializer(Serializer):
+    def serialize(self, t: PreSerializedTransaction):
+        buf = b''
+        buf += TimePointSecSerializer().serialize(t.expiration)
+        buf += NumberSerializer("uint16").serialize(t.ref_block_num)
+        buf += NumberSerializer("uint32").serialize(t.ref_block_prefix)
+        buf += VaruintSerializer().serialize(t.max_net_usage_words)
+        buf += NumberSerializer("uint8").serialize(t.max_cpu_usage_ms)
+        buf += VaruintSerializer().serialize(t.delay_sec)
+        
+        # must be serialized
+            
+        buf += ListSerializer().serialize(t.context_free_actions)
+        buf += ListSerializer().serialize(t.actions)
+        buf += ListSerializer().serialize(t.transaction_extensions)
+
+            # expiration: TimePointSec = field(
+            #     default_factory=lambda: datetime.now() + timedelta(seconds=120)
+            # )
+            # ref_block_num: UInt16 = 0
+            # ref_block_prefix: UInt32 = 0
+
+            # max_net_usage_words: VarUInt = 0
+            # max_cpu_usage_ms: UInt8 = 0
+            # delay_sec: VarUInt = 0
+            # context_free_actions: List[EosAction] = field(default_factory=list)
+            # actions: List[EosAction] = field(default_factory=list)
+            # transaction_extensions: List[EosExtension] = field(default_factory=list)
+        return buf
+
+    def deserialize(self, v: Any) -> bytes:
+        return super().deserialize(v)
+
+class TransactionExtensionSerializer(Serializer):
+    def serialize(self, v: TransactionExtension) -> bytes:
+        return NumberSerializer("uint16").serialize(v.type)+v.data
+
+    def deserialize(self, v: Any) -> bytes:
+        return super().deserialize(v)
 
 class VarintSerializer(Serializer):
     def serialize(self, v: int) -> bytes:
