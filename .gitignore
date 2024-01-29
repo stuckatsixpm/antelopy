@@ -11,5 +11,6 @@ dist
 
 # Dev
 dev
+.dev
 .vscode
 .wakatime-project
