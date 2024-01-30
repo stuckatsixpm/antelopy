@@ -4,13 +4,20 @@ Core class of abicache package"""
 
 import binascii
 import hashlib
-import logging
 import json
+import logging
 from typing import Any, Dict, List, Literal, Union
+
 from antelopy.cache.chain_interface import ChainInterface
-from antelopy.exceptions.exceptions import ABINotCachedError, ActionNotFoundError, PackageNotDefinedError, UnsupportedPackageError
+from antelopy.exceptions.exceptions import (
+    ABINotCachedError,
+    ActionNotFoundError,
+    PackageNotDefinedError,
+    UnsupportedPackageError,
+)
 from antelopy.types.abi import Abi
 from antelopy.types.serializables import TransactionSerializable
+
 
 class AbiCache:
     """Cache for imported ABIs
@@ -30,7 +37,11 @@ class AbiCache:
         Prints the person's name and age.
     """
 
-    def __init__(self, chain_endpoint: str, chain_package: Union[Literal['aioeos','eospy','pyntelope'],None] = None):
+    def __init__(
+        self,
+        chain_endpoint: str,
+        chain_package: Union[Literal["aioeos", "eospy", "pyntelope"], None] = None,
+    ):
         self.chain = ChainInterface(chain_endpoint)
         logging.debug(f"[ANTELOPY] initialized with chain endpoint: {chain_endpoint}")
         self.chain_id = binascii.unhexlify(self.chain.get_chain_id())
@@ -108,10 +119,10 @@ class AbiCache:
 
         Returns:
             bytes: the serialized transaction
-        """        
+        """
         if not self.chain_package:
             raise PackageNotDefinedError("""Antelope package hasn't been specified""")
-        t = TransactionSerializable(self.chain_package,trx)
+        t = TransactionSerializable(self.chain_package, trx)
         for action in t.transaction.actions:
             if isinstance(action.data, dict):
                 # This {"binargs": serialized_data} structure emulates
@@ -134,7 +145,9 @@ class AbiCache:
                 action.data = self.unhexlify(abi_bin["binargs"])
         return t.serialize()
 
-    async def async_sign_and_push(self, rpc:Any, signing_accounts: List[Any], trx: Any) -> Dict[str,Any]:
+    async def async_sign_and_push(
+        self, rpc: Any, signing_accounts: List[Any], trx: Any
+    ) -> Dict[str, Any]:
         serialized_transaction = self.serialize(trx)
         package_name = self.chain_package
         if package_name == "aioeos":
@@ -143,7 +156,9 @@ class AbiCache:
             ).digest()
             return await rpc.push_transaction(
                 signatures=[account.key.sign(digest) for account in signing_accounts],
-                serialized_transaction=(binascii.hexlify(serialized_transaction).decode()),
+                serialized_transaction=(
+                    binascii.hexlify(serialized_transaction).decode()
+                ),
             )
         raise UnsupportedPackageError("This package isn't supported by Antelopy yet")
 

@@ -47,15 +47,13 @@ class ChainInterface:
         Args:
             account_name (str): name of account with ABI
 
-       
+
         Returns:
             bytes: the chain id
         """
-        r = self.session.post(
-            f"{self.endpoint}/v1/chain/get_info"
-        )
+        r = self.session.post(f"{self.endpoint}/v1/chain/get_info")
         s = r.status_code
-       
+
         if s == 200:
             pass
         else:
