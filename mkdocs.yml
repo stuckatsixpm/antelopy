@@ -1,6 +1,10 @@
 site_name: antelopy
-site_url: 'https://antelopy.stuckatsixpm.com/latest' 
+site_url: 'https://antelopy.stuckatsixpm.com/'
+repo_url: https://github.com/stuckatsixpm/antelopy
+repo_name: stuckatsixpm/antelopy
 theme:
+  icon:
+      repo: fontawesome/brands/git-alt 
   features:
     - content.code.annotate
     - content.code.copy
