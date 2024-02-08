@@ -29,6 +29,7 @@ aioeos = "^1.0.2"
 
 [tool.poetry.group.docs.dependencies]
 mkdocs-material = "^9.5.8"
+mike = "^2.0.0"
 
 [tool.isort]
 profile = "black"

@@ -1,4 +1,5 @@
 site_name: antelopy
+site_url: 'http://localhost:8000/' 
 theme:
   features:
     - content.code.annotate
@@ -26,8 +27,17 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-  plugins:
-  - search
+plugins:
+- search
+- mike:
+    # These fields are all optional; the defaults are as below...
+    alias_type: symlink
+    redirect_template: null
+    deploy_prefix: ''
+    canonical_version: latest
+    version_selector: true
+    css_dir: css
+    javascript_dir: js
 markdown_extensions:
 - admonition
 - attr_list
@@ -57,3 +67,7 @@ nav:
   - 'API Reference':
     - 'Antelopy': 'api/index.md'
     - 'Antelopy2': 'api/index2.md'
+extra:
+  version:
+    provider: mike
+    default: latest
