@@ -148,6 +148,19 @@ class AbiCache:
     async def async_sign_and_push(
         self, rpc: Any, signing_accounts: List[Any], trx: Any
     ) -> Dict[str, Any]:
+        """Asynchronously serializes, signs, and pushes a transaction to the chain endpoint.
+
+        Args:
+            rpc (Any): An RPC instance, such as aioeos.EosJsonRpc or eospy.cleos.Cleos
+            signing_accounts (List[Any]): A list of signing accounts/keys, such as aioeos.EosAccount or eospy.keys.EOSKey
+            trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types. 
+
+        Raises:
+            UnsupportedPackageError: Raised when the package is not supported by antelopy
+
+        Returns:
+            Dict[str, Any]: A dictionary containing the json response from the chain endpoint
+        """        
         serialized_transaction = self.serialize(trx)
         package_name = self.chain_package
         if package_name == "aioeos":
@@ -160,6 +173,40 @@ class AbiCache:
                     binascii.hexlify(serialized_transaction).decode()
                 ),
             )
+        raise UnsupportedPackageError("This package isn't supported by Antelopy yet")
+
+    def sign_and_push(
+        self, rpc: Any, signing_accounts: List[Any], trx: Any
+    ) -> Dict[str, Any]:
+        """Serializes, signs, and pushes a transaction to the chain endpoint.
+
+        Args:
+            rpc (Any): An RPC instance, such as aioeos.EosJsonRpc or eospy.cleos.Cleos
+            signing_accounts (List[Any]): A list of signing accounts/keys, such as aioeos.EosAccount or eospy.keys.EOSKey
+            trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types. 
+
+        Raises:
+            UnsupportedPackageError: Raised when the package is not supported by antelopy
+
+        Returns:
+            Dict[str, Any]: A dictionary containing the json response from the chain endpoint
+        """        
+        package_name = self.chain_package
+        if package_name == "eospy":
+            _, lib_info = rpc.get_chain_lib_info(timeout=30)
+            trx['ref_block_num'] = lib_info['block_num'] & 65535
+            trx['ref_block_prefix'] = lib_info['ref_block_prefix']
+            serialized_transaction = self.serialize(trx)
+            
+            digest = binascii.hexlify(hashlib.sha256(
+                b"".join((self.chain_id, serialized_transaction, bytes(32)))
+            ).digest())
+            packed_transaction = {
+                'packed_trx': binascii.hexlify(serialized_transaction).decode(),
+                'signatures': [key.sign(digest) for key in signing_accounts],
+                'compression': 0,
+            }
+            return rpc.post('chain.push_transaction', params=None, data=json.dumps(packed_transaction))
         raise UnsupportedPackageError("This package isn't supported by Antelopy yet")
 
     def hexlify(self, data: bytes) -> bytes:

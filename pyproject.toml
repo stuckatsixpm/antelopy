@@ -26,6 +26,12 @@ optional = true
 [tool.poetry.group.aioeos.dependencies]
 aioeos = "^1.0.2"
 
+[tool.poetry.group.eospy]
+optional = true
+
+[tool.poetry.group.eospy.dependencies]
+libeospy = "^2.1.0"
+
 [tool.isort]
 profile = "black"
 

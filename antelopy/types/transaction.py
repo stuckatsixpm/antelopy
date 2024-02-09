@@ -52,6 +52,8 @@ class Transaction(BaseModel):
         if package == "aioeos":
             trx = asdict(trx, dict_factory=dict)
             return cls(**trx)
+        if package == "eospy":
+            return cls(**trx)
 
         raise UnsupportedPackageError(
             "This Antelope package isn't currently supported by Antelopy"
