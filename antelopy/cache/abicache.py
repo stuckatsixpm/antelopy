@@ -70,6 +70,18 @@ class AbiCache:
         raw_abi = self.chain.get_raw_abi(account_name)
         return json.dumps(raw_abi)
 
+    def get_cached_abi(self, account_name: str) -> Abi:
+        """Retrieves an ABI from the cache
+
+        Args:
+            account_name (str): account name
+        """
+        abi = self._abi_cache.get(account_name)
+        if not abi:
+            raise ABINotCachedError(f"ABI {account_name} hasn't been cached yet. Use read_abi or read_abi_from_json")
+        return abi
+
+
     def read_abi(self, account_name: str) -> None:
         """Loads an ABI of an account into memory
 
