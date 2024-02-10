@@ -1,3 +1,10 @@
+"""eospy_transfer_token.py
+
+See https://antelopy.stuckatsixpm.com/latest/usage/eospy for the corresponding
+tutorial/explanation.
+
+"""
+
 from decimal import Decimal
 
 import eospy.cleos
@@ -45,4 +52,4 @@ def transfer_token():
 
 
 if __name__ == "__main__":
-    print(transfer_token())
+    response_from_blockchain = transfer_token()

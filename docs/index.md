@@ -6,17 +6,17 @@ hide:
 title: Home
 ---
 
-# Antelopy
+# antelopy
 _Python serializer for Antelope blockchain transaction data_  
 _Supported Python versions: 3.8+_
 
 
 ## Overview
 
-Since Leap 3.1, the `abi_json_to_bin` endpoint has been deprecated to ensure the integrity of transaction data. Antelopy offers an drop-in serialization option to support Python-based interaction with Antelope blockchains.
+Since Leap 3.1, the `abi_json_to_bin` endpoint has been deprecated to ensure the integrity of transaction data. **antelopy** offers an drop-in serialization option to support Python-based interaction with Antelope blockchains.
 
 
-Antelopy supports the following libraries.
+**antelopy** supports the following libraries.
 
 | Antelope Library                                                   | Support Status                                     | Guide                |
 | ------------------------------------------------------------------ | -------------------------------------------------- | -------------------- |

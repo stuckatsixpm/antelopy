@@ -1,25 +1,26 @@
 # Serialization with aioeos
 
-Antelopy has full integration for the [aioeos](https://github.com/ulamlabs/aioeos/) package. 
+**antelopy** has full integration for the [aioeos](https://github.com/ulamlabs/aioeos/) package. 
 
 ## Simple token transfer
-In this example, a simple token transfer is performed. It is assumed that you have used `aioeos` before, and this guide won't cover the usage of the package.
+In this example, a simple token transfer is performed. It is assumed that you have used **aioeos** before, and this guide won't cover the usage of the package.
 
 ### Initialisation
 First, import necessary modules, and then initialize the ABI cache, reading the `eosio.token` account's ABI from chain.
 
-```py hl_lines="10-13" linenums="1"
+```py hl_lines="10-14" linenums="1"
 import asyncio
 from decimal import Decimal
 
 from aioeos import EosAccount, EosAction, EosJsonRpc, EosTransaction
+
 from antelopy import AbiCache
 
 CHAIN_ENDPOINT = "https://waxtestnet.greymass.com"
 
 abi_cache = AbiCache(
-    chain_endpoint=CHAIN_ENDPOINT, 
-    chain_package="aioeos", 
+    chain_endpoint=CHAIN_ENDPOINT,
+    chain_package="aioeos",
 )
 abi_cache.read_abi("eosio.token")
 ```
@@ -27,7 +28,7 @@ Make sure to include the `chain_package` parameter when creating the AbiCache.
 
 ### aioeos configuration
 
-Next is defining an RPC, account, and transfer action to use with `aioeos`.
+Next is defining an RPC and account to use with **aioeos**.
 
 !!! danger
     **Don't put your keys in your code. Hardcoding your private key into your code is a huge security risk.**
@@ -38,13 +39,13 @@ Next is defining an RPC, account, and transfer action to use with `aioeos`.
 
     The private key in the example below is one that was randomly generated for these docs, and is not the real key.
 
-``` py linenums="15"
+``` py linenums="16"
 RPC = EosJsonRpc(CHAIN_ENDPOINT)
 
 # DO NOT put your key directly in your code.
 wax_account = EosAccount(
     name="professoroak",
-    private_key="5J2yE5oNnEfAmdBQtzLTo979ptHXXidmQXNvDcAFP9AJVMKnmkb"
+    private_key="5J2yE5oNnEfAmdBQtzLTo979ptHXXidmQXNvDcAFP9AJVMKnmkb",
 )
 ```
 
@@ -52,7 +53,7 @@ wax_account = EosAccount(
  
 First, the transfer action and an `aioeos.EosTransaction` are created, and then the AbiCache's `async_sign_and_push` function is used to serialize the transaction, sign it, and asynchronously send it to the chain endpoint.
 
-``` py hl_lines="21-25" linenums="23" 
+``` py hl_lines="21-24" linenums="25" 
 async def transfer_token():
     transfer_value = Decimal("3.14").quantize(Decimal("1.00000000")) # (1)!
     transfer_action = EosAction(
@@ -74,9 +75,7 @@ async def transfer_token():
         actions=[transfer_action],
     )
     chain_response = await abi_cache.async_sign_and_push(
-        RPC, 
-        [wax_account], 
-        transaction
+        RPC, [wax_account], transaction
     )
     return chain_response
 ```
@@ -89,7 +88,7 @@ e.g. `Decimal("3.14").quantize(Decimal("1.00000000"))` = `Decimal("3.14000000")`
 !!! info "The `async_sign_and_push` function"
     
     
-    The `async_sign_and_push` function in line 46 takes the following arguments:  
+    The `async_sign_and_push` function in line 45 takes the following arguments:  
     
     | Parameter | Description | Value in example |
     | ------ | ------ | ------ |
@@ -97,11 +96,11 @@ e.g. `Decimal("3.14").quantize(Decimal("1.00000000"))` = `Decimal("3.14000000")`
     | `signing_accounts` | `list` of `EosAccount` instances | `[wax_account]` |
     | `trx` | an `EosTransaction` instance  | `transaction` |
     
-    The AbiCache knows from the `#!py chain_package="aioeos"` declaration back in the initialisation step that it will be receiving instances of `aioeos` classes, and handles the serialization and signing of the transaction accordingly. It then uses the RPC that was passed in the function to push the transaction to the blockchain.
+    The AbiCache knows from the `#!py chain_package="aioeos"` declaration back in the initialisation step that it will be receiving instances of **aioeos** classes, and handles the serialization and signing of the transaction accordingly. It then uses the RPC that was passed in the function to push the transaction to the blockchain.
     
 Finally, we call the async function. The returned response is a `dict` containing the JSON response from the endpoint.
 
-``` py linenums="50"
+``` py linenums="51"
 if __name__ == "__main__":
     response_from_blockchain = asyncio.run(transfer_token())
 ```
@@ -113,13 +112,14 @@ import asyncio
 from decimal import Decimal
 
 from aioeos import EosAccount, EosAction, EosJsonRpc, EosTransaction
+
 from antelopy import AbiCache
 
 CHAIN_ENDPOINT = "https://waxtestnet.greymass.com"
 
 abi_cache = AbiCache(
-    chain_endpoint=CHAIN_ENDPOINT, 
-    chain_package="aioeos", 
+    chain_endpoint=CHAIN_ENDPOINT,
+    chain_package="aioeos",
 )
 abi_cache.read_abi("eosio.token")
 
@@ -128,8 +128,9 @@ RPC = EosJsonRpc(CHAIN_ENDPOINT)
 # DO NOT put your key directly in your code.
 wax_account = EosAccount(
     name="professoroak",
-    private_key="5J2yE5oNnEfAmdBQtzLTo979ptHXXidmQXNvDcAFP9AJVMKnmkb"
+    private_key="5J2yE5oNnEfAmdBQtzLTo979ptHXXidmQXNvDcAFP9AJVMKnmkb",
 )
+
 
 async def transfer_token():
     transfer_value = Decimal("3.14").quantize(Decimal("1.00000000"))
@@ -152,11 +153,10 @@ async def transfer_token():
         actions=[transfer_action],
     )
     chain_response = await abi_cache.async_sign_and_push(
-        RPC, 
-        [wax_account], 
-        transaction
+        RPC, [wax_account], transaction
     )
     return chain_response
+
 
 if __name__ == "__main__":
     response_from_blockchain = asyncio.run(transfer_token())
