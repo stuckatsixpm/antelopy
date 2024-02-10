@@ -50,25 +50,26 @@ class AbiCache:
         if self.chain_package:
             logging.debug("[ANTELOPY] using chain package: %s" % self.chain_package)
         self._abi_cache: Dict[str, Abi] = {}
+        self._raw_abis: Dict[str, dict] = {}
 
     def dump_abi(self, account_name: str, path: str) -> None:
-        """Dumps an ABI of an account into path
+        """Dumps a cached ABI of an account into path
 
         Args:
             account_name (str): account name
         """
-        raw_abi = self.chain.get_raw_abi(account_name)
+        abi = self._raw_abis.get(account_name)
         with open(path, "w+", encoding="utf-8") as jfp:
-            json.dump(raw_abi, jfp, indent=2)
+            json.dump(abi,jfp)
 
-    def dump_abi_as_json(self, account_name: str, path: str) -> str:
-        """Dumps an ABI of an account as a string
+    def dump_abi_as_json(self, account_name: str) -> str:
+        """Dumps a cached ABI of an account as a string
 
         Args:
             account_name (str): account name
         """
-        raw_abi = self.chain.get_raw_abi(account_name)
-        return json.dumps(raw_abi)
+        abi = self._raw_abis.get(account_name)
+        return json.dumps(abi)
 
     def get_cached_abi(self, account_name: str) -> Abi:
         """Retrieves an ABI from the cache
@@ -77,6 +78,17 @@ class AbiCache:
             account_name (str): account name
         """
         abi = self._abi_cache.get(account_name)
+        if not abi:
+            raise ABINotCachedError(f"ABI {account_name} hasn't been cached yet. Use read_abi or read_abi_from_json")
+        return abi
+    
+    def get_cached_raw_abi(self, account_name: str) -> Dict[str,Any]:
+        """Retrieves an ABI from the cache
+
+        Args:
+            account_name (str): account name
+        """
+        abi = self._raw_abis.get(account_name)
         if not abi:
             raise ABINotCachedError(f"ABI {account_name} hasn't been cached yet. Use read_abi or read_abi_from_json")
         return abi
@@ -89,6 +101,7 @@ class AbiCache:
             account_name (str): account name
         """
         raw_abi = self.chain.get_raw_abi(account_name)
+        self._raw_abis[account_name] = raw_abi
         self._abi_cache[account_name] = Abi(name=account_name, **raw_abi)
         logging.debug("[ANTELOPY] successfully imported ABI from: %s" % account_name)
 
@@ -100,6 +113,7 @@ class AbiCache:
         """
         with open(path, "r", encoding="utf-8") as jfp:
             abi = json.load(jfp)
+        self._raw_abis[account_name] = abi
         self._abi_cache[account_name] = Abi(name=account_name, **abi)
         logging.debug("[ANTELOPY] successfully imported ABI from: %s" % account_name)
 
@@ -119,11 +133,7 @@ class AbiCache:
         Returns:
             bytes: _description_
         """
-        abi = self._abi_cache.get(contract_name)
-        if not abi:
-            raise ABINotCachedError(
-                f"ABI {contract_name} hasn't been cached yet. Use read_abi or read_abi_from_json"
-            )
+        abi = self.get_cached_abi(contract_name)
         action = abi.get_action(contract_action)
         if not action:
             raise ActionNotFoundError(
