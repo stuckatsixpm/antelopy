@@ -43,12 +43,12 @@ class AbiCache:
         chain_package: Union[Literal["aioeos", "eospy", "pyntelope"], None] = None,
     ):
         self.chain = ChainInterface(chain_endpoint)
-        logging.debug(f"[ANTELOPY] initialized with chain endpoint: {chain_endpoint}")
+        logging.debug("[ANTELOPY] initialized with chain endpoint: %s" % chain_endpoint)
         self.chain_id = binascii.unhexlify(self.chain.get_chain_id())
-        logging.debug(f"[ANTELOPY] Chain ID: {self.chain_id}")
+        logging.debug("[ANTELOPY] Chain ID: %s" % {self.chain_id})
         self.chain_package = chain_package
         if self.chain_package:
-            logging.debug(f"[ANTELOPY] using chain package: {self.chain_package}")
+            logging.debug("[ANTELOPY] using chain package: %s" % self.chain_package)
         self._abi_cache: Dict[str, Abi] = {}
 
     def dump_abi(self, account_name: str, path: str) -> None:
@@ -61,6 +61,15 @@ class AbiCache:
         with open(path, "w+", encoding="utf-8") as jfp:
             json.dump(raw_abi, jfp, indent=2)
 
+    def dump_abi_as_json(self, account_name: str, path: str) -> str:
+        """Dumps an ABI of an account as a string
+
+        Args:
+            account_name (str): account name
+        """
+        raw_abi = self.chain.get_raw_abi(account_name)
+        return json.dumps(raw_abi)
+
     def read_abi(self, account_name: str) -> None:
         """Loads an ABI of an account into memory
 
@@ -69,7 +78,7 @@ class AbiCache:
         """
         raw_abi = self.chain.get_raw_abi(account_name)
         self._abi_cache[account_name] = Abi(name=account_name, **raw_abi)
-        logging.debug(f"[ANTELOPY] successfully imported ABI from: {account_name}")
+        logging.debug("[ANTELOPY] successfully imported ABI from: %s" % account_name)
 
     def read_abi_from_json(self, account_name: str, path: str) -> None:
         """Loads an ABI of an account into memory
@@ -80,7 +89,7 @@ class AbiCache:
         with open(path, "r", encoding="utf-8") as jfp:
             abi = json.load(jfp)
         self._abi_cache[account_name] = Abi(name=account_name, **abi)
-        logging.debug(f"[ANTELOPY] successfully imported ABI from: {account_name}")
+        logging.debug("[ANTELOPY] successfully imported ABI from: %s" % account_name)
 
     def serialize_data(
         self, contract_name: str, contract_action: str, data: Dict[str, Any]
@@ -153,14 +162,14 @@ class AbiCache:
         Args:
             rpc (Any): An RPC instance, such as aioeos.EosJsonRpc or eospy.cleos.Cleos
             signing_accounts (List[Any]): A list of signing accounts/keys, such as aioeos.EosAccount or eospy.keys.EOSKey
-            trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types. 
+            trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types.
 
         Raises:
             UnsupportedPackageError: Raised when the package is not supported by antelopy
 
         Returns:
             Dict[str, Any]: A dictionary containing the json response from the chain endpoint
-        """        
+        """
         serialized_transaction = self.serialize(trx)
         package_name = self.chain_package
         if package_name == "aioeos":
@@ -183,30 +192,36 @@ class AbiCache:
         Args:
             rpc (Any): An RPC instance, such as aioeos.EosJsonRpc or eospy.cleos.Cleos
             signing_accounts (List[Any]): A list of signing accounts/keys, such as aioeos.EosAccount or eospy.keys.EOSKey
-            trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types. 
+            trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types.
 
         Raises:
             UnsupportedPackageError: Raised when the package is not supported by antelopy
 
         Returns:
             Dict[str, Any]: A dictionary containing the json response from the chain endpoint
-        """        
+        """
         package_name = self.chain_package
         if package_name == "eospy":
             _, lib_info = rpc.get_chain_lib_info(timeout=30)
-            trx['ref_block_num'] = lib_info['block_num'] & 65535
-            trx['ref_block_prefix'] = lib_info['ref_block_prefix']
+            trx["ref_block_num"] = lib_info["block_num"] & 65535
+            trx["ref_block_prefix"] = lib_info["ref_block_prefix"]
             serialized_transaction = self.serialize(trx)
-            
-            digest = binascii.hexlify(hashlib.sha256(
-                b"".join((self.chain_id, serialized_transaction, bytes(32)))
-            ).digest())
+
+            digest = binascii.hexlify(
+                hashlib.sha256(
+                    b"".join((self.chain_id, serialized_transaction, bytes(32)))
+                ).digest()
+            )
             packed_transaction = {
-                'packed_trx': binascii.hexlify(serialized_transaction).decode(),
-                'signatures': [key.sign(digest) for key in signing_accounts],
-                'compression': 0,
+                "packed_trx": binascii.hexlify(serialized_transaction).decode(),
+                "signatures": [key.sign(digest) for key in signing_accounts],
+                "compression": 0,
             }
-            return rpc.post('chain.push_transaction', params=None, data=json.dumps(packed_transaction))
+            return rpc.post(
+                "chain.push_transaction",
+                params=None,
+                data=json.dumps(packed_transaction),
+            )
         raise UnsupportedPackageError("This package isn't supported by Antelopy yet")
 
     def hexlify(self, data: bytes) -> bytes:
