@@ -7,8 +7,9 @@ title: Home
 ---
 
 # Antelopy
+_Python serializer for Antelope blockchain transaction data_  
+_Supported Python versions: 3.8+_
 
-_Python serializer for Antelope blockchain transaction data_
 
 ## Overview
 
@@ -19,6 +20,6 @@ Antelopy supports the following libraries.
 
 | Antelope Library                                                   | Support Status                                     | Guide                |
 | ------------------------------------------------------------------ | -------------------------------------------------- | -------------------- |
-| [aioeos](https://github.com/ulamlabs/aioeos/)                      | :material-check: Fully integrated                  | [Link](usage/aioeos.md) |
-| [eospy](https://github.com/eosnewyork/eospy) _(archived Jan 2024)_ | :material-progress-pencil: Serialization supported | [Link](usage/eospy.md) |
-| [pyntelope](https://github.com/FACINGS/pyntelope/)                 | :material-progress-alert: To do                    | N/A                  |
+| [aioeos *(github)*](https://github.com/ulamlabs/aioeos/)                      | :material-check: Fully integrated                  | [Link](usage/aioeos.md) |
+| [eospy *(github)*](https://github.com/eosnewyork/eospy) _(archived Jan 2024)_ | :material-check: Fully integrated                  | [Link](usage/eospy.md) |
+| [pyntelope *(github)*](https://github.com/FACINGS/pyntelope/)                 | :material-progress-alert: To do                    | N/A                  |
