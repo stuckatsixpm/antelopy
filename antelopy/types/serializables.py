@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Protocol
 
 from antelopy.types import serializers
+from antelopy.types.transaction import PreSerializedTransaction, Transaction
 
 
 class Serializable(Protocol):
@@ -57,6 +58,35 @@ class DictSerializable(Serializable):
 
     def deserialize(self):
         ...
+
+
+class TransactionSerializable(Serializable):
+    def __init__(self, package: str, transaction: Any):
+        self.transaction = Transaction.from_ext(package, transaction)
+
+    def serialize(self) -> bytes:
+        t = serializers.TransactionExtensionSerializer()
+        a = serializers.ActionSerializer()
+        preserialized_trx = PreSerializedTransaction(
+            expiration=self.transaction.expiration,
+            ref_block_num=self.transaction.ref_block_num,
+            ref_block_prefix=self.transaction.ref_block_prefix,
+            max_net_usage_words=self.transaction.max_net_usage_words,
+            max_cpu_usage_ms=self.transaction.max_cpu_usage_ms,
+            delay_sec=self.transaction.delay_sec,
+            context_free_actions=[
+                a.serialize(action) for action in self.transaction.context_free_actions
+            ],
+            actions=[a.serialize(action) for action in self.transaction.actions],
+            transaction_extensions=[
+                t.serialize(trx_ext)
+                for trx_ext in self.transaction.transaction_extensions
+            ],
+        )
+        return serializers.TransactionSerializer().serialize(preserialized_trx)
+
+    def deserialize(self):
+        return super().deserialize()
 
 
 SERIALIZER_MAP = {
