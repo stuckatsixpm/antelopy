@@ -31,6 +31,11 @@ optional = true
 
 [tool.poetry.group.eospy.dependencies]
 libeospy = "^2.1.0"
+=======
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = "^9.5.8"
+mike = "^2.0.0"
 
 [tool.isort]
 profile = "black"
