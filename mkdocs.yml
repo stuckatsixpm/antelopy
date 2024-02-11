@@ -8,6 +8,7 @@ theme:
   features:
     - content.code.annotate
     - content.code.copy
+    - content.footnote.tooltips
     - navigation.expand
     - navigation.instant
     - navigation.prune
@@ -45,6 +46,7 @@ plugins:
 markdown_extensions:
 - admonition
 - attr_list
+- footnotes
 - tables
 - pymdownx.details
 - pymdownx.emoji:
@@ -63,14 +65,14 @@ markdown_extensions:
 
 nav:
   - Home: 'index.md'
-  - Quickstart: 
+  - Learn: 
+    - 'Usage Guide': 'usage/index.md'
     - 'Installation': 'usage/installation.md'
     - 'The ABI Cache': 'usage/the_abi_cache.md'
     - 'Usage with aioeos': 'usage/aioeos.md'
     - 'Usage with eospy': 'usage/eospy.md'
   - 'API Reference':
-    - 'Antelopy': 'api/index.md'
-    - 'Antelopy2': 'api/index2.md'
+    - 'Note': 'api/index.md'
 extra:
   version:
     provider: mike

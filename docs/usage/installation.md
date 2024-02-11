@@ -1,5 +1,7 @@
 # Installation
 
+**antelopy** is compatible with Python 3.8 onwards.
+
 ## Using pip
 
 **antelopy** can be installed from PyPI.
