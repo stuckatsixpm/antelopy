@@ -4,6 +4,11 @@ from antelopy import AbiCache
 
 
 @pytest.fixture
+def anyio_backend():
+    return "asyncio"
+
+
+@pytest.fixture
 def abi_cache():
     cache = AbiCache(chain_endpoint="https://wax.eosphere.io")
     # read from file
