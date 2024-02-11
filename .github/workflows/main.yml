@@ -16,6 +16,7 @@ jobs:
     strategy:
       matrix:
         python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        toxenvs: ["py", "coverage", "aioeos", "eospy"]
 
     steps:
       - uses: actions/checkout@v4
@@ -28,4 +29,6 @@ jobs:
           pip install poetry
           poetry install
       - name: Run tox
-        run: poetry run tox -e py,coverage
+        run: poetry run tox -e ${{matrix.toxenvs}}
+      - name: Run serialization test
+        run: poetry run 
