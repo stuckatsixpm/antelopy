@@ -30,5 +30,3 @@ jobs:
           poetry install
       - name: Run tox
         run: poetry run tox -e ${{matrix.toxenvs}}
-      - name: Run serialization test
-        run: poetry run 
