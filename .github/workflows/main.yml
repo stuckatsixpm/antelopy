@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: check openssl
         env:
-          OPENSSL_CONF: .github/helpers/openssl_legacy.cnf
+          OPENSSL_CONF: .github/helpers/openssl.cnf
         run: openssl list -providers
   build:
     runs-on: ubuntu-latest
