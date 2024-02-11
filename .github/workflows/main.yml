@@ -33,9 +33,5 @@ jobs:
           poetry install
       - name: Run tox
         run: | 
-          sudo sed -i '/^default = default_sect/a legacy = legacy_sect' /etc/ssl/openssl.cnf
-          sudo sed -i '/^\[default_sect\]/a activate = 1' /etc/ssl/openssl.cnf
-          sudo echo "" >> /etc/ssl/openssl.cnf
-          sudo echo "[legacy_sect]" >> /etc/ssl/openssl.cnf
-          sudo echo "activate = 1" >> /etc/ssl/openssl.cnf
+          export OPENSSL_CONF=.github/helpers/openssl.cnf
           poetry run tox -e ${{matrix.toxenvs}}
