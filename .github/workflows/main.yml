@@ -10,7 +10,16 @@ on:
       - main
       - dev
       - release/*
+      
 jobs:
+  openssl-exp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: check openssl
+        env:
+          OPENSSL_CONF: .github/helpers/openssl_legacy.cnf
+        run: echo openssl list -providers
   build:
     runs-on: ubuntu-latest
     strategy:
