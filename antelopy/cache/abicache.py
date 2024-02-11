@@ -60,7 +60,7 @@ class AbiCache:
         """
         abi = self.get_cached_raw_abi(account_name)
         with open(path, "w+", encoding="utf-8") as jfp:
-            json.dump(abi,jfp)
+            json.dump(abi, jfp)
 
     def dump_abi_as_json(self, account_name: str) -> str:
         """Dumps a cached ABI of an account as a string
@@ -79,10 +79,12 @@ class AbiCache:
         """
         abi = self._abi_cache.get(account_name)
         if not abi:
-            raise ABINotCachedError(f"ABI {account_name} hasn't been cached yet. Use read_abi or read_abi_from_json")
+            raise ABINotCachedError(
+                f"ABI {account_name} hasn't been cached yet. Use read_abi or read_abi_from_json"
+            )
         return abi
-    
-    def get_cached_raw_abi(self, account_name: str) -> Dict[str,Any]:
+
+    def get_cached_raw_abi(self, account_name: str) -> Dict[str, Any]:
         """Retrieves an ABI from the raw ABI cache
 
         Args:
@@ -90,9 +92,10 @@ class AbiCache:
         """
         abi = self._raw_abis.get(account_name)
         if not abi:
-            raise ABINotCachedError(f"ABI {account_name} hasn't been cached yet. Use read_abi or read_abi_from_json")
+            raise ABINotCachedError(
+                f"ABI {account_name} hasn't been cached yet. Use read_abi or read_abi_from_json"
+            )
         return abi
-
 
     def read_abi(self, account_name: str) -> None:
         """Loads an ABI of an account into memory
