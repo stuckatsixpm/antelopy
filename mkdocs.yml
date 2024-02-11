@@ -1,0 +1,79 @@
+site_name: antelopy
+site_url: 'https://antelopy.stuckatsixpm.com/'
+repo_url: https://github.com/stuckatsixpm/antelopy
+repo_name: stuckatsixpm/antelopy
+theme:
+  icon:
+      repo: fontawesome/brands/git-alt 
+  features:
+    - content.code.annotate
+    - content.code.copy
+    - content.footnote.tooltips
+    - navigation.expand
+    - navigation.instant
+    - navigation.prune
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - toc.follow
+  language: en
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+plugins:
+- search
+- mike:
+    # These fields are all optional; the defaults are as below...
+    alias_type: symlink
+    redirect_template: null
+    deploy_prefix: ''
+    canonical_version: latest
+    version_selector: true
+    css_dir: css
+    javascript_dir: js
+markdown_extensions:
+- admonition
+- attr_list
+- footnotes
+- tables
+- pymdownx.details
+- pymdownx.emoji:
+    emoji_index: !!python/name:material.extensions.emoji.twemoji
+    emoji_generator: !!python/name:material.extensions.emoji.to_svg
+- pymdownx.highlight:
+    auto_title: true
+    anchor_linenums: true
+    line_spans: __span
+    pygments_lang_class: true
+- pymdownx.inlinehilite
+- pymdownx.snippets
+- pymdownx.superfences
+- pymdownx.tabbed:
+    alternate_style: true
+
+nav:
+  - Home: 'index.md'
+  - Learn: 
+    - 'Usage Guide': 'usage/index.md'
+    - 'Installation': 'usage/installation.md'
+    - 'The ABI Cache': 'usage/the_abi_cache.md'
+    - 'Usage with aioeos': 'usage/aioeos.md'
+    - 'Usage with eospy': 'usage/eospy.md'
+  - 'API Reference':
+    - 'Note': 'api/index.md'
+extra:
+  version:
+    provider: mike
+    default: latest

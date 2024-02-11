@@ -14,3 +14,5 @@ dev
 .dev
 .vscode
 .wakatime-project
+/utils
+/site
