@@ -12,20 +12,14 @@ on:
       - release/*
       
 jobs:
-  openssl-exp:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: check openssl
-        env:
-          OPENSSL_CONF: .github/helpers/openssl.cnf
-        run: openssl list -providers
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
-        toxenvs: ["py", "coverage", "aioeos", "eospy"]
+        python: ["3.12"]
+        toxenvs: ["eospy"]
+        # python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        # toxenvs: ["py", "coverage", "aioeos", "eospy"]
 
     steps:
       - uses: actions/checkout@v4
@@ -38,6 +32,10 @@ jobs:
           pip install poetry
           poetry install
       - name: Run tox
-        env:
-          OPENSSL_CONF: .github/helpers/openssl_legacy.cnf
-        run: poetry run tox -e ${{matrix.toxenvs}}
+        run: | 
+          sudo sed -i '/^default = default_sect/a legacy = legacy_sect' /etc/ssl/openssl.cnf
+          sudo sed -i '/^\[default_sect\]/a activate = 1' /etc/ssl/openssl.cnf
+          sudo echo "" >> /etc/ssl/openssl.cnf
+          sudo echo "[legacy_sect]" >> /etc/ssl/openssl.cnf
+          sudo echo "activate = 1" >> /etc/ssl/openssl.cnf
+          poetry run tox -e ${{matrix.toxenvs}}
