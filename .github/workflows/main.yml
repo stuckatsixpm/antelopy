@@ -29,4 +29,6 @@ jobs:
           pip install poetry
           poetry install
       - name: Run tox
+        env:
+          OPENSSL_CONF: .github/helpers/openssl_legacy.cnf
         run: poetry run tox -e ${{matrix.toxenvs}}
