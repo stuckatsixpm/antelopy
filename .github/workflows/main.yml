@@ -19,7 +19,7 @@ jobs:
       - name: check openssl
         env:
           OPENSSL_CONF: .github/helpers/openssl_legacy.cnf
-        run: echo openssl list -providers
+        run: openssl list -providers
   build:
     runs-on: ubuntu-latest
     strategy:
