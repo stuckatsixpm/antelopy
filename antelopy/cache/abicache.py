@@ -58,7 +58,7 @@ class AbiCache:
         Args:
             account_name (str): account name
         """
-        abi = self._raw_abis.get(account_name)
+        abi = self.get_cached_raw_abi(account_name)
         with open(path, "w+", encoding="utf-8") as jfp:
             json.dump(abi,jfp)
 
@@ -68,7 +68,7 @@ class AbiCache:
         Args:
             account_name (str): account name
         """
-        abi = self._raw_abis.get(account_name)
+        abi = self.get_cached_raw_abi(account_name)
         return json.dumps(abi)
 
     def get_cached_abi(self, account_name: str) -> Abi:
@@ -83,7 +83,7 @@ class AbiCache:
         return abi
     
     def get_cached_raw_abi(self, account_name: str) -> Dict[str,Any]:
-        """Retrieves an ABI from the cache
+        """Retrieves an ABI from the raw ABI cache
 
         Args:
             account_name (str): account name
