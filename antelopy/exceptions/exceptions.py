@@ -19,9 +19,21 @@ class ActionNotFoundError(Exception):
     """Action not found in ABI"""
 
 
+class ActionDataNotSerializedError(Exception):
+    """Action hasn't been serialized yet"""
+
+
 class ActionMissingFieldError(Exception):
     """Missing field in action serialization"""
 
 
+class PackageNotDefinedError(Exception):
+    """Raised when Antelope package hasn't been specified"""
+
+
 class SerializationError(Exception):
     """Field was unable to be serialized"""
+
+
+class UnsupportedPackageError(Exception):
+    """This Antelope package used isn't currently supported by Antelopy"""
