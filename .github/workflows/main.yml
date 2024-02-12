@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install
+          poetry install --with dev
       - name: Run tox
         run: |
           poetry run tox -e ${{matrix.toxenvs}}
