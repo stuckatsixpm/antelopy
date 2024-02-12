@@ -31,5 +31,19 @@ jobs:
           pip install poetry
           poetry install
       - name: Run tox
-        run: | 
+        run: |
+          wget https://www.openssl.org/source/openssl-3.2.1.tar.gz
+          tar zxvf openssl-3.2.1.tar.gz
+          cd openssl-3.2.1
+          ./config --prefix=$HOME/openssl --openssldir=$HOME/openssl shared zlib
+          make
+          make install
+          cd /home/runner/work/antelopy/antelopy/
+          export PATH=$HOME/openssl/bin:$PATH
+          
+          sudo sed -i '/^default = default_sect/a legacy = legacy_sect' $HOME/openssl/openssl.cnf
+          sudo sed -i '/^\[default_sect\]/a activate = 1' $HOME/openssl/openssl.cnf
+          sudo echo '' >> $HOME/openssl/openssl.cnf
+          sudo echo '[legacy_sect]' >> $HOME/openssl/openssl.cnf
+          sudo echo 'activate = 1' >> $HOME/openssl/openssl.cnf 
           poetry run tox -e ${{matrix.toxenvs}}
