@@ -31,8 +31,15 @@ jobs:
         run: |
           pip install poetry
           poetry install
-          sudo apt-get update
-          sudo apt-get install libssl-dev openssl -y
       - name: Run tox
         run: | 
+          wget https://www.openssl.org/source/openssl-3.2.1.tar.gz
+          tar zxvf openssl-3.2.1.tar.gz
+          cd openssl-3.2.1
+          ./config --prefix=$HOME/openssl --openssldir=$HOME/username/openssl shared zlib
+          make
+          make install
+          cd ~
+          export PATH=$HOME/openssl/bin:$PATH
+          
           poetry run tox -e ${{matrix.toxenvs}}
