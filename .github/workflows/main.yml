@@ -36,10 +36,10 @@ jobs:
           wget https://www.openssl.org/source/openssl-3.2.1.tar.gz
           tar zxvf openssl-3.2.1.tar.gz
           cd openssl-3.2.1
-          ./config --prefix=$HOME/openssl --openssldir=$HOME/username/openssl shared zlib
+          ./config --prefix=$HOME/openssl --openssldir=$HOME/openssl shared zlib
           make
           make install
-          cd ~
+          cd /home/runner/work/antelopy/antelopy/
           export PATH=$HOME/openssl/bin:$PATH
           
           poetry run tox -e ${{matrix.toxenvs}}
