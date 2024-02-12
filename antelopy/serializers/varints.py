@@ -2,6 +2,7 @@
 
 Varint Implementation based off https://github.com/fmoo/python-varint
 """
+
 from typing import Tuple
 
 
