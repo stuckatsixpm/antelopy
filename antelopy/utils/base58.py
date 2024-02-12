@@ -3,6 +3,7 @@
 Implementation of base58 encoding because no version of base58 is compatible
 with aioeos, eospy, and pyntelope :P
 """
+
 from typing import Union
 
 ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"

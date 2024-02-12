@@ -1,4 +1,5 @@
 """Extra type hinting types"""
+
 from typing import Literal
 
 # The default types for Antelope, and the `struct` module format string where relevant

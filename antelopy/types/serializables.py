@@ -1,3 +1,7 @@
+"""serializables.py
+
+Contains classes to hold serializable data"""
+
 from typing import Any, Dict, List, Protocol
 
 from antelopy.types import serializers
@@ -5,26 +9,36 @@ from antelopy.types.transaction import PreSerializedTransaction, Transaction
 
 
 class Serializable(Protocol):
+    """Protocol class for serializable classes"""
+
     def serialize(self) -> bytes:
-        ...
+        """Protocol template for serializable classes"""
+        raise NotImplementedError("This hasn't been implemented yet")
 
     def deserialize(self):
-        ...
+        """Protocol template for serializable classes"""
+        raise NotImplementedError("This hasn't been implemented yet")
 
 
 class BasicSerializable(Serializable):
+    """Helper class for serializing basic types"""
+
     def __init__(self, value: Any, serialization_strategy: serializers.Serializer):
         self.value = value
         self.strategy = serialization_strategy
 
     def serialize(self):
+        """Serialize the serializable's value"""
         return self.strategy.serialize(self.value)
 
     def deserialize(self):
-        ...
+        """Deserialize the serializable's value"""
+        raise NotImplementedError("This hasn't been implemented yet")
 
 
 class ListSerializable(Serializable):
+    """Helper class for serializing lists"""
+
     def __init__(
         self, values: List[Any], field_type: str = "", serialized: bool = False
     ):
@@ -34,6 +48,7 @@ class ListSerializable(Serializable):
         self.strategy = strategy
 
     def serialize(self):
+        """Serialize the serializable's value"""
         if self.strategy and not self.serialized:
             serialized_values = [self.strategy.serialize(v) for v in self.values]
         else:
@@ -41,10 +56,13 @@ class ListSerializable(Serializable):
         return serializers.ListSerializer().serialize(serialized_values)
 
     def deserialize(self):
-        ...
+        """Deserialize the serializable's value"""
+        raise NotImplementedError("This hasn't been implemented yet")
 
 
 class DictSerializable(Serializable):
+    """Helper class for serializing dicts or key/value structures"""
+
     def __init__(
         self,
         values: Dict[str, Serializable],
@@ -54,17 +72,22 @@ class DictSerializable(Serializable):
         self.strategy = serialization_strategy
 
     def serialize(self):
+        """Serialize the serializable's value"""
         return self.strategy.serialize(self.values)
 
     def deserialize(self):
-        ...
+        """Deserialize the serializable's value"""
+        raise NotImplementedError("This hasn't been implemented yet")
 
 
 class TransactionSerializable(Serializable):
+    """Helper class for serializing transactions"""
+
     def __init__(self, package: str, transaction: Any):
         self.transaction = Transaction.from_ext(package, transaction)
 
     def serialize(self) -> bytes:
+        """Serialize the serializable's value"""
         t = serializers.TransactionExtensionSerializer()
         a = serializers.ActionSerializer()
         preserialized_trx = PreSerializedTransaction(
@@ -86,7 +109,8 @@ class TransactionSerializable(Serializable):
         return serializers.TransactionSerializer().serialize(preserialized_trx)
 
     def deserialize(self):
-        return super().deserialize()
+        """Deserialize the serializable's value"""
+        raise NotImplementedError("This hasn't been implemented yet")
 
 
 SERIALIZER_MAP = {

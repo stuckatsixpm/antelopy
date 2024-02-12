@@ -17,6 +17,7 @@ from antelopy.exceptions.exceptions import (
 )
 from antelopy.types.abi import Abi
 from antelopy.types.serializables import TransactionSerializable
+from antelopy.types.transaction import PackedTransaction
 
 
 class AbiCache:
@@ -43,12 +44,12 @@ class AbiCache:
         chain_package: Union[Literal["aioeos", "eospy", "pyntelope"], None] = None,
     ):
         self.chain = ChainInterface(chain_endpoint)
-        logging.debug("[ANTELOPY] initialized with chain endpoint: %s" % chain_endpoint)
+        logging.debug("[ANTELOPY] initialized with chain endpoint: %s", chain_endpoint)
         self.chain_id = binascii.unhexlify(self.chain.get_chain_id())
-        logging.debug("[ANTELOPY] Chain ID: %s" % {self.chain_id})
+        logging.debug("[ANTELOPY] Chain ID: %s", {self.chain_id})
         self.chain_package = chain_package
         if self.chain_package:
-            logging.debug("[ANTELOPY] using chain package: %s" % self.chain_package)
+            logging.debug("[ANTELOPY] using chain package: %s", self.chain_package)
         self._abi_cache: Dict[str, Abi] = {}
         self._raw_abis: Dict[str, dict] = {}
 
@@ -106,7 +107,7 @@ class AbiCache:
         raw_abi = self.chain.get_raw_abi(account_name)
         self._raw_abis[account_name] = raw_abi
         self._abi_cache[account_name] = Abi(name=account_name, **raw_abi)
-        logging.debug("[ANTELOPY] successfully imported ABI from: %s" % account_name)
+        logging.debug("[ANTELOPY] successfully imported ABI from: %s", account_name)
 
     def read_abi_from_json(self, account_name: str, path: str) -> None:
         """Loads an ABI of an account into memory
@@ -118,7 +119,7 @@ class AbiCache:
             abi = json.load(jfp)
         self._raw_abis[account_name] = abi
         self._abi_cache[account_name] = Abi(name=account_name, **abi)
-        logging.debug("[ANTELOPY] successfully imported ABI from: %s" % account_name)
+        logging.debug("[ANTELOPY] successfully imported ABI from: %s", account_name)
 
     def serialize_data(
         self, contract_name: str, contract_action: str, data: Dict[str, Any]
@@ -186,7 +187,8 @@ class AbiCache:
 
         Args:
             rpc (Any): An RPC instance, such as aioeos.EosJsonRpc or eospy.cleos.Cleos
-            signing_accounts (List[Any]): A list of signing accounts/keys, such as aioeos.EosAccount or eospy.keys.EOSKey
+            signing_accounts (List[Any]): A list of signing accounts/keys,
+                such as aioeos.EosAccount or eospy.keys.EOSKey
             trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types.
 
         Raises:
@@ -216,7 +218,8 @@ class AbiCache:
 
         Args:
             rpc (Any): An RPC instance, such as aioeos.EosJsonRpc or eospy.cleos.Cleos
-            signing_accounts (List[Any]): A list of signing accounts/keys, such as aioeos.EosAccount or eospy.keys.EOSKey
+            signing_accounts (List[Any]): A list of signing accounts/keys,
+                such as aioeos.EosAccount or eospy.keys.EOSKey
             trx (Any): A transaction. This accepts dictionaries and aioeos.Transaction types.
 
         Raises:
@@ -237,15 +240,14 @@ class AbiCache:
                     b"".join((self.chain_id, serialized_transaction, bytes(32)))
                 ).digest()
             )
-            packed_transaction = {
-                "packed_trx": binascii.hexlify(serialized_transaction).decode(),
-                "signatures": [key.sign(digest) for key in signing_accounts],
-                "compression": 0,
-            }
+            packed_transaction = PackedTransaction(
+                packed_trx=binascii.hexlify(serialized_transaction).decode(),
+                signatures=[key.sign(digest) for key in signing_accounts],
+            )
             return rpc.post(
                 "chain.push_transaction",
                 params=None,
-                data=json.dumps(packed_transaction),
+                data=packed_transaction.model_dump_json(),
             )
         raise UnsupportedPackageError("This package isn't supported by Antelopy yet")
 
