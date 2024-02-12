@@ -1,24 +1,49 @@
 [tool.poetry]
 name = "antelopy"
-version = "0.1.6"
+version = "0.2.0"
 description = "Python helper for Antelope transaction serialization"
 authors = ["Jake Hattwell <stuck@sixpm.dev>"]
 license = "MIT"
 readme = "readme.md"
-homepage = "https://github.com/stuckatsixpm/antelopy"
+homepage = "https://antelopy.stuckatsixpm.com"
+documentation = "https://antelopy.stuckatsixpm.com"
+repository = "https://github.com/stuckatsixpm/antelopy"
 
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.31.0"
 pydantic = "^2.4.2"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+anyio = "^4.2.0"
 black = "^23.10.1"
 pytest = "^7.4.3"
 pylint = "^3.0.2"
 coverage = "^7.3.2"
 tox = "^4.11.3"
 isort = "^5.12.0"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = "^9.5.8"
+mike = "^2.0.0"
+
+[tool.poetry.group.aioeos]
+optional = true
+
+[tool.poetry.group.aioeos.dependencies]
+aioeos = "^1.0.2"
+
+[tool.poetry.group.eospy]
+optional = true
+
+[tool.poetry.group.eospy.dependencies]
+libeospy = "^2.1.0"
 
 [tool.isort]
 profile = "black"

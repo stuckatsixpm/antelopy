@@ -1,28 +1,34 @@
 name: build
-on: 
+on:
   push:
-      branches:
-        - main
-        - dev
+    branches:
+      - main
+      - dev
+      - release/*
   pull_request:
     branches:
       - main
+      - dev
+      - release/*
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        toxenvs: ["py", "coverage"]
 
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install
+          poetry install --with dev
       - name: Run tox
-        run: poetry run tox -e py,coverage
+        run: |
+          poetry run tox -e ${{matrix.toxenvs}}

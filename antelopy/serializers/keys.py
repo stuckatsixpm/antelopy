@@ -16,7 +16,7 @@ KEY_TYPES = {
 
 
 def serialize_public_key(s: str):
-    """Converts string key (EOS...) to bytes with leading key-type byte"""
+    """Converts string key to bytes with leading key-type byte"""
     buf = b""
     if s[:3] == "EOS":
         key_type = KEY_TYPES["k1"]
