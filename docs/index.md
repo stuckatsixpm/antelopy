@@ -16,7 +16,9 @@ title: Home
 
 **antelopy** serializes transaction data for Antelope blockchains, integrating with existing Python packages for ease of use.
 
-In the Antelope version Leap 3.1, the `abi_json_to_bin` endpoint was deprecated to ensure the integrity of transaction data. However, available options for interacting with Antelope chains with Python all rely on this endpoint for the serialization step. **antelopy** is designed to handle this process in a non-intrusive way, minimizing changes users of **aioeos** and **eospy** need to make.
+In the Antelope's Leap 3.1 release,, the `abi_json_to_bin` endpoint was deprecated to ensure the integrity of transaction data. However, available options for interacting with Antelope chains with Python all rely on this endpoint for the serialization step. **antelopy** is designed to handle this process in a non-intrusive way, minimizing changes users of **aioeos** and **eospy** need to make.
+
+[Usage Guide](usage/index.md){ .md-button .md-button--primary }
 
 -----------------
 
@@ -25,10 +27,8 @@ In the Antelope version Leap 3.1, the `abi_json_to_bin` endpoint was deprecated 
 
 * Serialize transaction data in preparation for transaction  
 * Read ABIs from the blockchain or file, with the option to save for reuse  
-* Full integration with **aioeos** and **eospy**  
-  
+* Integration wrappers around **aioeos** and **eospy**  
 
-### Integration
 **antelopy** supports the following libraries.
 
 | Antelope Library | Support Status                    | Guide                   | Repository                                                                 |
@@ -37,6 +37,10 @@ In the Antelope version Leap 3.1, the `abi_json_to_bin` endpoint was deprecated 
 | **eospy**        | :material-check: Fully integrated[^1]  | [Link](usage/eospy.md)  | [Link](https://github.com/eosnewyork/eospy) |
 | **pyntelope**    | :material-progress-alert: Waiting for update   | N/A                     | [Link](https://github.com/FACINGS/pyntelope/)                              |
 
+
+### Sponsors
+
+[![WAX Labs](_resources/wax_labs_logo.svg){ loading=lazy }](https://labs.wax.io/)
 
 
 [^1]: **eospy's** GitHub repository was archived Jan 2024
