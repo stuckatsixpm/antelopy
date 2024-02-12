@@ -15,10 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        python: ["3.12"]
-        toxenvs: ["eospy"]
-        # python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+      matrix: 
+        python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        toxenvs: ["py", "coverage"]
         # toxenvs: ["py", "coverage", "aioeos", "eospy"]
 
     steps:
@@ -31,11 +30,6 @@ jobs:
         run: |
           pip install poetry
           poetry install
-          sudo bash -c "sudo sed -i '/^default = default_sect/a legacy = legacy_sect' /etc/ssl/openssl.cnf"
-          sudo bash -c "sudo sed -i '/^\[default_sect\]/a activate = 1' /etc/ssl/openssl.cnf"
-          sudo bash -c "sudo echo '' >> /etc/ssl/openssl.cnf"
-          sudo bash -c "sudo echo '[legacy_sect]' >> /etc/ssl/openssl.cnf"
-          sudo bash -c "sudo echo 'activate = 1' >> /etc/ssl/openssl.cnf"
       - name: Run tox
         run: | 
           poetry run tox -e ${{matrix.toxenvs}}
