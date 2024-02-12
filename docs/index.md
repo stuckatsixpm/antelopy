@@ -14,7 +14,7 @@ title: Home
 
 -----------------
 
-**antelopy** effortlessly integrates with existing Python packages to serialized transaction data for Antelope blockchains. 
+**antelopy** serializes transaction data for Antelope blockchains, integrating with existing Python packages for ease of use.
 
 In the Antelope version Leap 3.1, the `abi_json_to_bin` endpoint was deprecated to ensure the integrity of transaction data. However, available options for interacting with Antelope chains with Python all rely on this endpoint for the serialization step. **antelopy** is designed to handle this process in a non-intrusive way, minimizing changes users of **aioeos** and **eospy** need to make.
 
