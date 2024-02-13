@@ -22,7 +22,7 @@ In the Antelope's Leap 3.1 release, the `abi_json_to_bin` endpoint was deprecate
 | Antelope Library | Support Status                  | Usage Guide             | Repository                                    |
 | ---------------- | ------------------------------- | ----------------------- | --------------------------------------------- |
 | **aioeos**       | ✔ Fully integrated              | [Link](usage/aioeos.md) | [Link](https://github.com/ulamlabs/aioeos/)   |
-| **eospy**        | ✔ Fully integrated[^1]          | [Link](usage/eospy.md)  | [Link](https://github.com/eosnewyork/eospy)   |
+| **eospy**        | ✔ Fully integrated          | [Link](usage/eospy.md)  | [Link](https://github.com/eosnewyork/eospy)   |
 | **pyntelope**    | ✘ Waiting for dependency update | N/A                     | [Link](https://github.com/FACINGS/pyntelope/) |
 
 ## Basic Usage:
